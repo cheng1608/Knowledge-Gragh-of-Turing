@@ -1,0 +1,32 @@
+﻿id,label,name,birthYear,deathYear,year,type,country,description,source
+Q179310,Concept,computing,,,,,,,https://www.wikidata.org/
+Q220798,Organization,Government Communications Headquarters,,,,,United Kingdom,,https://www.wikidata.org/
+Q66135280,Organization,Hazlehurst Community Primary School,,,,,United Kingdom,,https://www.wikidata.org/
+Q924289,Organization,King's College,,,,,United Kingdom,,https://www.wikidata.org/
+Q1967606,Organization,National Physical Laboratory,,,,,United Kingdom,,https://www.wikidata.org/
+Q21578,Organization,Princeton University,,,,,United States,,https://www.wikidata.org/
+Q2278254,Organization,Sherborne School,,,,,United Kingdom,,https://www.wikidata.org/
+Q35794,Organization,University of Cambridge,,,,,United Kingdom,,https://www.wikidata.org/
+Q867530,Organization,Victoria University of Manchester,,,,,United Kingdom,,https://www.wikidata.org/
+Q7251,Person,Alan Turing,1912,1954,,,,,https://www.wikidata.org/
+Q450154,Person,Andrew Hodges,,,,,,,https://www.wikidata.org/
+Q59884129,Person,Cicely Popplewell,,,,,,,https://www.wikidata.org/
+Q298521,Person,Saul Kripke,,,,,,,https://www.wikidata.org/
+Q310798,Person,Stephen Wolfram,,,,,,,https://www.wikidata.org/
+Q122744,Place,Maida Vale,,,,,United Kingdom,,https://www.wikidata.org/
+Q2011497,Place,Wilmslow,,,,,United Kingdom,,https://www.wikidata.org/
+Q480476,Work,Bombe,,,,,,,https://www.wikidata.org/
+Q309157,Work,Church–Turing thesis,,,,,,,https://www.wikidata.org/
+Q20895966,Work,Intelligent Machinery,,,,,,,https://www.wikidata.org/
+Q133854517,Work,Q133854517,,,,,,,https://www.wikidata.org/
+Q20895949,Work,Q20895949,,,,,,,https://www.wikidata.org/
+Q772056,Work,Q772056,,,,,,,https://www.wikidata.org/
+Q7661303,Work,Symmetric Turing machine,,,,,,,https://www.wikidata.org/
+Q197970,Work,Turing completeness,,,,,,,https://www.wikidata.org/
+Q1527413,Work,Turing degree,,,,,,,https://www.wikidata.org/
+Q163310,Work,Turing machine,,,,,,,https://www.wikidata.org/
+Q189223,Work,Turing test,,,,,,,https://www.wikidata.org/
+Q622849,Work,halting problem,,,,,,,https://www.wikidata.org/
+Q1190223,Work,non-deterministic Turing machine,,,,,,,https://www.wikidata.org/
+Q1191836,Work,probabilistic Turing machine,,,,,,,https://www.wikidata.org/
+Q2703890,Work,universal Turing machine,,,,,,,https://www.wikidata.org/
