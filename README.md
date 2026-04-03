@@ -33,5 +33,5 @@ None
 ## Data source
 
 - Wikidata SPARQL Endpoint：`https://query.wikidata.org/sparql`
-
+- MacTutor 传记页面：`https://mathshistory.st-andrews.ac.uk/Biographies/Turing/`
 
