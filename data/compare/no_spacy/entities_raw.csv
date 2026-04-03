@@ -1,0 +1,93 @@
+﻿mention,label,start,end,method
+Alan Turing,PERSON,0,11,rule_gazetteer
+Alan Turing,CANDIDATE,0,11,rule_heuristic
+1912,DATE,13,17,rule_pattern
+1954,DATE,20,24,rule_pattern
+Paddington,GPE,160,170,rule_gazetteer
+London,GPE,172,178,rule_gazetteer
+Julius Mathison Turing,PERSON,192,214,rule_gazetteer
+Julius Mathison Turing,CANDIDATE,192,214,rule_heuristic
+Indian Civil Service,ORG,244,264,rule_gazetteer
+Indian Civil Service,CANDIDATE,244,264,rule_heuristic
+Ethel Sara Stoney,PERSON,305,322,rule_gazetteer
+Ethel Sara Stoney,CANDIDATE,305,322,rule_heuristic
+India,GPE,428,433,rule_gazetteer
+When Alan,CANDIDATE,435,444,rule_heuristic
+India,GPE,503,508,rule_gazetteer
+England,GPE,526,533,rule_gazetteer
+Hazlehurst Preparatory School,CANDIDATE,705,734,rule_heuristic
+Common Entrance Examination,CANDIDATE,965,992,rule_heuristic
+Public School,CANDIDATE,2146,2159,rule_heuristic
+Scientific Specialist,CANDIDATE,2219,2240,rule_heuristic
+Public School,CANDIDATE,2270,2283,rule_heuristic
+Christopher Morcom,PERSON,2664,2682,rule_gazetteer
+Christopher Morcom,CANDIDATE,2664,2682,rule_heuristic
+However Morcom,CANDIDATE,2882,2896,rule_heuristic
+King's College,ORG,3246,3260,rule_gazetteer
+Cambridge,GPE,3262,3271,rule_gazetteer
+Cambridge,GPE,3566,3575,rule_gazetteer
+quantum mechanics,CONCEPT,3731,3748,rule_gazetteer
+Moral Science Club,CANDIDATE,3900,3918,rule_heuristic
+Cambridge,GPE,3922,3931,rule_gazetteer
+Germany,GPE,4274,4281,rule_gazetteer
+Britain,GPE,4313,4320,rule_gazetteer
+King's College,ORG,5133,5147,rule_gazetteer
+Cambridge,GPE,5149,5158,rule_gazetteer
+"In
+Turing",CANDIDATE,5292,5301,rule_heuristic
+Cambridge,GPE,5320,5329,rule_gazetteer
+On Computable Numbers,CANDIDATE,5460,5481,rule_heuristic
+Turing machine,CONCEPT,5611,5625,rule_gazetteer
+The Turing,CANDIDATE,5702,5712,rule_heuristic
+Turing machine,CONCEPT,5706,5720,rule_gazetteer
+Turing machine,CONCEPT,6151,6165,rule_gazetteer
+Turing machine,CONCEPT,6624,6638,rule_gazetteer
+Princeton University,ORG,7178,7198,rule_gazetteer
+Princeton University,CANDIDATE,7178,7198,rule_heuristic
+Turing machine,CONCEPT,8199,8213,rule_gazetteer
+Princeton Turing,CANDIDATE,8290,8306,rule_heuristic
+Cambridge,GPE,8373,8382,rule_gazetteer
+Government Code,CANDIDATE,8631,8646,rule_heuristic
+Cypher School,CANDIDATE,8651,8664,rule_heuristic
+German Enigma,CANDIDATE,8722,8735,rule_heuristic
+Enigma,CONCEPT,8729,8735,rule_gazetteer
+Government Code,CANDIDATE,8793,8808,rule_heuristic
+Cypher School,CANDIDATE,8813,8826,rule_heuristic
+Bletchley Park,ORG,8830,8844,rule_gazetteer
+Bletchley Park,CANDIDATE,8830,8844,rule_heuristic
+Bletchley Park,ORG,8879,8893,rule_gazetteer
+Bletchley Park,CANDIDATE,8879,8893,rule_heuristic
+Official Secrets Act,CANDIDATE,8913,8933,rule_heuristic
+Enigma,CONCEPT,9524,9530,rule_gazetteer
+The Enigma,CANDIDATE,9558,9568,rule_heuristic
+Enigma,CONCEPT,9562,9568,rule_gazetteer
+United States,CANDIDATE,9845,9858,rule_heuristic
+National Physical Laboratory,CANDIDATE,10280,10308,rule_heuristic
+London,GPE,10312,10318,rule_gazetteer
+Automatic Computing Engine,CANDIDATE,10366,10392,rule_heuristic
+Walton Athletic Club,CANDIDATE,11056,11076,rule_heuristic
+University of Manchester,ORG,11198,11222,rule_gazetteer
+Manchester,GPE,11212,11222,rule_gazetteer
+National Physical Laboratory,CANDIDATE,11290,11318,rule_heuristic
+Manchester,GPE,11342,11352,rule_gazetteer
+artificial intelligence,CONCEPT,11990,12013,rule_gazetteer
+Turing Test,CANDIDATE,12057,12068,rule_heuristic
+British Prime Minister Gordon,CANDIDATE,13861,13890,rule_heuristic
+Official Secrets Act,CANDIDATE,14357,14377,rule_heuristic
+Bletchley Park,ORG,14405,14419,rule_gazetteer
+Bletchley Park,CANDIDATE,14405,14419,rule_heuristic
+Manchester,GPE,14594,14604,rule_gazetteer
+On Alan Turing,CANDIDATE,15303,15317,rule_heuristic
+Alan Turing,PERSON,15306,15317,rule_gazetteer
+Alan Turing,PERSON,15403,15414,rule_gazetteer
+Alan Turing,CANDIDATE,15403,15414,rule_heuristic
+Biographical Memoirs,CANDIDATE,15416,15436,rule_heuristic
+Royal Society,CANDIDATE,15455,15468,rule_heuristic
+London,GPE,15472,15478,rule_gazetteer
+"London
+Other",CANDIDATE,15472,15484,rule_heuristic
+Earliest Known Uses,CANDIDATE,15486,15505,rule_heuristic
+Earliest Known Uses,CANDIDATE,15553,15572,rule_heuristic
+Earliest Known Uses,CANDIDATE,15620,15639,rule_heuristic
+Earliest Known Uses,CANDIDATE,15687,15706,rule_heuristic
+Earliest Known Uses,CANDIDATE,15754,15773,rule_heuristic

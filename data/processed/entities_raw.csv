@@ -1,0 +1,164 @@
+﻿mention,label,start,end,method
+Alan Turing,PERSON,0,11,spacy_ner
+Alan Turing,CANDIDATE,0,11,rule_heuristic
+1912 - 1954,DATE,13,24,spacy_ner
+1912,DATE,13,17,rule_pattern
+1954,DATE,20,24,rule_pattern
+Paddington,GPE,160,170,spacy_ner
+London,GPE,172,178,spacy_ner
+Julius Mathison Turing,PERSON,192,214,rule_gazetteer
+Julius Mathison Turing,CANDIDATE,192,214,rule_heuristic
+Mathison Turing,PERSON,199,214,spacy_ner
+the Indian Civil Service,ORG,240,264,spacy_ner
+Indian Civil Service,ORG,244,264,rule_gazetteer
+Indian Civil Service,CANDIDATE,244,264,rule_heuristic
+Alan,PERSON,290,294,spacy_ner
+Ethel Sara Stoney,PERSON,305,322,spacy_ner
+Ethel Sara Stoney,CANDIDATE,305,322,rule_heuristic
+Alan,PERSON,390,394,spacy_ner
+India,GPE,428,433,spacy_ner
+When Alan,CANDIDATE,435,444,rule_heuristic
+Alan,PERSON,440,444,spacy_ner
+about one year old,DATE,449,467,spacy_ner
+India,GPE,503,508,spacy_ner
+Alan,PERSON,518,522,spacy_ner
+England,GPE,526,533,spacy_ner
+Alan,PERSON,562,566,spacy_ner
+a few months,DATE,671,683,spacy_ner
+Next,ORG,685,689,spacy_ner
+Hazlehurst Preparatory School,ORG,705,734,spacy_ner
+Hazlehurst Preparatory School,CANDIDATE,705,734,rule_heuristic
+Common Entrance Examination,ORG,965,992,spacy_ner
+Common Entrance Examination,CANDIDATE,965,992,rule_heuristic
+the year,DATE,1000,1008,spacy_ner
+Sherborne,GPE,1931,1940,spacy_ner
+a very early age,DATE,1996,2012,spacy_ner
+Public School,ORG,2146,2159,spacy_ner
+Public School,CANDIDATE,2146,2159,rule_heuristic
+Scientific Specialist,ORG,2219,2240,spacy_ner
+Scientific Specialist,CANDIDATE,2219,2240,rule_heuristic
+a Public School,ORG,2268,2283,spacy_ner
+Public School,CANDIDATE,2270,2283,rule_heuristic
+Christopher Morcom,PERSON,2664,2682,spacy_ner
+Christopher Morcom,CANDIDATE,2664,2682,rule_heuristic
+the year,DATE,2695,2703,spacy_ner
+However Morcom,CANDIDATE,2882,2896,rule_heuristic
+February,DATE,2905,2913,spacy_ner
+Morcom,ORG,2989,2995,spacy_ner
+King's College,ORG,3246,3260,spacy_ner
+Cambridge,GPE,3262,3271,spacy_ner
+the following year,DATE,3500,3518,spacy_ner
+Cambridge,GPE,3566,3575,spacy_ner
+quantum mechanics,CONCEPT,3731,3748,rule_gazetteer
+the Moral Science Club,ORG,3896,3918,spacy_ner
+Moral Science Club,CANDIDATE,3900,3918,rule_heuristic
+Cambridge,GPE,3922,3931,spacy_ner
+December of that year,DATE,3935,3956,spacy_ner
+the year,DATE,4245,4253,spacy_ner
+Hitler,PERSON,4257,4263,spacy_ner
+Germany,GPE,4274,4281,spacy_ner
+Britain,GPE,4313,4320,spacy_ner
+King's College,ORG,5133,5147,spacy_ner
+Cambridge,GPE,5149,5158,spacy_ner
+"In
+Turing",CANDIDATE,5292,5301,rule_heuristic
+Cambridge,GPE,5320,5329,spacy_ner
+On Computable Numbers,CANDIDATE,5460,5481,rule_heuristic
+Computable Numbers,PERSON,5463,5481,spacy_ner
+Entscheidungsproblem,GPE,5510,5530,spacy_ner
+Turing machine,CONCEPT,5611,5625,rule_gazetteer
+The Turing,CANDIDATE,5702,5712,rule_heuristic
+Turing machine,CONCEPT,5706,5720,rule_gazetteer
+Turing machine,CONCEPT,6151,6165,rule_gazetteer
+Ï,PERSON,6209,6211,spacy_ner
+Turing machine,CONCEPT,6624,6638,rule_gazetteer
+Turing,ORG,7042,7048,spacy_ner
+Princeton University,ORG,7178,7198,spacy_ner
+Princeton University,CANDIDATE,7178,7198,rule_heuristic
+Princeton,PERSON,7256,7265,spacy_ner
+Turing,ORG,7352,7358,spacy_ner
+Turing,ORG,7706,7712,spacy_ner
+Turing machine,CONCEPT,8199,8213,rule_gazetteer
+today,DATE,8222,8227,spacy_ner
+Princeton Turing,ORG,8290,8306,spacy_ner
+Princeton Turing,CANDIDATE,8290,8306,rule_heuristic
+Cambridge,GPE,8373,8382,spacy_ner
+today,DATE,8478,8483,spacy_ner
+Government Code,CANDIDATE,8631,8646,rule_heuristic
+Cypher School,ORG,8651,8664,spacy_ner
+Cypher School,CANDIDATE,8651,8664,rule_heuristic
+German Enigma,CANDIDATE,8722,8735,rule_heuristic
+Enigma,CONCEPT,8729,8735,rule_gazetteer
+Government Code,CANDIDATE,8793,8808,rule_heuristic
+Cypher School,ORG,8813,8826,spacy_ner
+Cypher School,CANDIDATE,8813,8826,rule_heuristic
+Bletchley Park,ORG,8830,8844,rule_gazetteer
+Bletchley Park,CANDIDATE,8830,8844,rule_heuristic
+Bletchley Park,ORG,8879,8893,rule_gazetteer
+Bletchley Park,CANDIDATE,8879,8893,rule_heuristic
+Official Secrets Act,CANDIDATE,8913,8933,rule_heuristic
+the day,DATE,9291,9298,spacy_ner
+W G Welchman,PERSON,9375,9387,spacy_ner
+Enigma,CONCEPT,9524,9530,rule_gazetteer
+Luftwaffe,ORG,9547,9556,spacy_ner
+The Enigma,CANDIDATE,9558,9568,rule_heuristic
+Enigma,CONCEPT,9562,9568,rule_gazetteer
+Bletchley,GPE,9816,9825,spacy_ner
+the United States,GPE,9841,9858,spacy_ner
+United States,CANDIDATE,9845,9858,rule_heuristic
+Bletchley,PERSON,9995,10004,spacy_ner
+O.B.E.,ORG,10222,10228,spacy_ner
+the National Physical Laboratory,ORG,10276,10308,spacy_ner
+National Physical Laboratory,CANDIDATE,10280,10308,rule_heuristic
+London,GPE,10312,10318,spacy_ner
+Automatic Computing Engine,CANDIDATE,10366,10392,rule_heuristic
+ACE,ORG,10547,10550,spacy_ner
+Walton Athletic Club,ORG,11056,11076,spacy_ner
+Walton Athletic Club,CANDIDATE,11056,11076,rule_heuristic
+the University of Manchester,ORG,11194,11222,spacy_ner
+University of Manchester,ORG,11198,11222,rule_gazetteer
+Manchester,GPE,11212,11222,rule_gazetteer
+the National Physical Laboratory,ORG,11286,11318,spacy_ner
+National Physical Laboratory,CANDIDATE,11290,11318,rule_heuristic
+Manchester,GPE,11342,11352,spacy_ner
+Newman,PERSON,11354,11360,spacy_ner
+F C Williams,ORG,11440,11452,spacy_ner
+a few years,DATE,11554,11565,spacy_ner
+today,DATE,11964,11969,spacy_ner
+artificial intelligence,CONCEPT,11990,12013,rule_gazetteer
+the Turing Test,WORK_OF_ART,12053,12068,spacy_ner
+Turing Test,CANDIDATE,12057,12068,rule_heuristic
+today,DATE,12084,12089,spacy_ner
+a year,DATE,13773,13779,spacy_ner
+British Prime Minister Gordon,CANDIDATE,13861,13890,rule_heuristic
+Gordon Brown,PERSON,13884,13896,spacy_ner
+Official Secrets Act,CANDIDATE,14357,14377,rule_heuristic
+Bletchley Park,ORG,14405,14419,rule_gazetteer
+Bletchley Park,CANDIDATE,14405,14419,rule_heuristic
+Manchester,ORG,14594,14604,spacy_ner
+Manchester,GPE,14594,14604,rule_gazetteer
+Greece,GPE,15012,15018,spacy_ner
+On Alan Turing,CANDIDATE,15303,15317,rule_heuristic
+Alan Turing's,PERSON,15306,15319,spacy_ner
+Alan Turing,PERSON,15306,15317,rule_gazetteer
+F L Morris,ORG,15351,15361,spacy_ner
+C B Jones,ORG,15366,15375,spacy_ner
+Alan Turing,PERSON,15403,15414,spacy_ner
+Alan Turing,CANDIDATE,15403,15414,rule_heuristic
+Biographical Memoirs,WORK_OF_ART,15416,15436,spacy_ner
+Biographical Memoirs,CANDIDATE,15416,15436,rule_heuristic
+Fellows of the Royal Society of London,ORG,15440,15478,spacy_ner
+Royal Society,CANDIDATE,15455,15468,rule_heuristic
+London,GPE,15472,15478,rule_gazetteer
+"London
+Other",CANDIDATE,15472,15484,rule_heuristic
+Earliest Known Uses,CANDIDATE,15486,15505,rule_heuristic
+the Words of Mathematics,ORG,15517,15541,spacy_ner
+Earliest Known Uses,CANDIDATE,15553,15572,rule_heuristic
+the Words of Mathematics,ORG,15584,15608,spacy_ner
+Earliest Known Uses,CANDIDATE,15620,15639,rule_heuristic
+the Words of Mathematics,ORG,15651,15675,spacy_ner
+Earliest Known Uses,CANDIDATE,15687,15706,rule_heuristic
+the Words of Mathematics (M,ORG,15718,15745,spacy_ner
+Earliest Known Uses,CANDIDATE,15754,15773,rule_heuristic
+the Words of Mathematics,ORG,15785,15809,spacy_ner
