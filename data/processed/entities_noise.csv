@@ -1,0 +1,2 @@
+﻿mention,mention_norm,label,start,end,method,reason
+Ï,ï,PERSON,6209,6211,spacy_ner,too_short

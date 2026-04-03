@@ -1,0 +1,81 @@
+﻿mention,mention_norm,label,start,end,method
+Automatic Computing Engine,automatic computing engine,CANDIDATE,10366,10392,rule_heuristic
+British Prime Minister Gordon,british prime minister gordon,CANDIDATE,13861,13890,rule_heuristic
+Earliest Known Uses,earliest known uses,CANDIDATE,15486,15505,rule_heuristic
+German Enigma,german enigma,CANDIDATE,8722,8735,rule_heuristic
+Government Code,government code,CANDIDATE,8631,8646,rule_heuristic
+However Morcom,however morcom,CANDIDATE,2882,2896,rule_heuristic
+In Turing,in turing,CANDIDATE,5292,5301,rule_heuristic
+London Other,london other,CANDIDATE,15472,15484,rule_heuristic
+Moral Science Club,moral science club,CANDIDATE,3900,3918,rule_heuristic
+National Physical Laboratory,national physical laboratory,CANDIDATE,10280,10308,rule_heuristic
+Official Secrets Act,official secrets act,CANDIDATE,8913,8933,rule_heuristic
+On Alan Turing,on alan turing,CANDIDATE,15303,15317,rule_heuristic
+On Computable Numbers,on computable numbers,CANDIDATE,5460,5481,rule_heuristic
+Royal Society,royal society,CANDIDATE,15455,15468,rule_heuristic
+The Enigma,the enigma,CANDIDATE,9558,9568,rule_heuristic
+The Turing,the turing,CANDIDATE,5702,5712,rule_heuristic
+Turing Test,turing test,CANDIDATE,12057,12068,rule_heuristic
+United States,united states,CANDIDATE,9845,9858,rule_heuristic
+When Alan,when alan,CANDIDATE,435,444,rule_heuristic
+artificial intelligence,artificial intelligence,CONCEPT,11990,12013,rule_gazetteer
+Enigma,enigma,CONCEPT,8729,8735,rule_gazetteer
+quantum mechanics,quantum mechanics,CONCEPT,3731,3748,rule_gazetteer
+Turing machine,turing machine,CONCEPT,5611,5625,rule_gazetteer
+Britain,britain,GPE,4313,4320,spacy_ner
+Cambridge,cambridge,GPE,3262,3271,spacy_ner
+England,england,GPE,526,533,spacy_ner
+Entscheidungsproblem,entscheidungsproblem,GPE,5510,5530,spacy_ner
+Germany,germany,GPE,4274,4281,spacy_ner
+Greece,greece,GPE,15012,15018,spacy_ner
+India,india,GPE,428,433,spacy_ner
+London,london,GPE,172,178,spacy_ner
+Paddington,paddington,GPE,160,170,spacy_ner
+Sherborne,sherborne,GPE,1931,1940,spacy_ner
+the United States,the united states,GPE,9841,9858,spacy_ner
+a Public School,a public school,ORG,2268,2283,spacy_ner
+ACE,ace,ORG,10547,10550,spacy_ner
+Bletchley Park,bletchley park,ORG,8830,8844,rule_gazetteer
+C B Jones,c b jones,ORG,15366,15375,spacy_ner
+Common Entrance Examination,common entrance examination,ORG,965,992,spacy_ner
+Cypher School,cypher school,ORG,8651,8664,spacy_ner
+F C Williams,f c williams,ORG,11440,11452,spacy_ner
+F L Morris,f l morris,ORG,15351,15361,spacy_ner
+Fellows of the Royal Society of London,fellows of the royal society of london,ORG,15440,15478,spacy_ner
+Hazlehurst Preparatory School,hazlehurst preparatory school,ORG,705,734,spacy_ner
+Indian Civil Service,indian civil service,ORG,244,264,rule_gazetteer
+King's College,king's college,ORG,3246,3260,spacy_ner
+Luftwaffe,luftwaffe,ORG,9547,9556,spacy_ner
+Manchester,manchester,ORG,14594,14604,spacy_ner
+Morcom,morcom,ORG,2989,2995,spacy_ner
+Next,next,ORG,685,689,spacy_ner
+O.B.E.,o.b.e.,ORG,10222,10228,spacy_ner
+Princeton Turing,princeton turing,ORG,8290,8306,spacy_ner
+Princeton University,princeton university,ORG,7178,7198,spacy_ner
+Public School,public school,ORG,2146,2159,spacy_ner
+Scientific Specialist,scientific specialist,ORG,2219,2240,spacy_ner
+the Indian Civil Service,the indian civil service,ORG,240,264,spacy_ner
+the Moral Science Club,the moral science club,ORG,3896,3918,spacy_ner
+the National Physical Laboratory,the national physical laboratory,ORG,10276,10308,spacy_ner
+the University of Manchester,the university of manchester,ORG,11194,11222,spacy_ner
+the Words of Mathematics,the words of mathematics,ORG,15517,15541,spacy_ner
+the Words of Mathematics (M,the words of mathematics (m,ORG,15718,15745,spacy_ner
+Turing,turing,ORG,7042,7048,spacy_ner
+University of Manchester,university of manchester,ORG,11198,11222,rule_gazetteer
+Walton Athletic Club,walton athletic club,ORG,11056,11076,spacy_ner
+Alan,alan,PERSON,290,294,spacy_ner
+Alan Turing,alan turing,PERSON,0,11,spacy_ner
+Alan Turing's,alan turing's,PERSON,15306,15319,spacy_ner
+Bletchley,bletchley,PERSON,9995,10004,spacy_ner
+Christopher Morcom,christopher morcom,PERSON,2664,2682,spacy_ner
+Computable Numbers,computable numbers,PERSON,5463,5481,spacy_ner
+Ethel Sara Stoney,ethel sara stoney,PERSON,305,322,spacy_ner
+Gordon Brown,gordon brown,PERSON,13884,13896,spacy_ner
+Hitler,hitler,PERSON,4257,4263,spacy_ner
+Julius Mathison Turing,julius mathison turing,PERSON,192,214,rule_gazetteer
+Mathison Turing,mathison turing,PERSON,199,214,spacy_ner
+Newman,newman,PERSON,11354,11360,spacy_ner
+Princeton,princeton,PERSON,7256,7265,spacy_ner
+W G Welchman,w g welchman,PERSON,9375,9387,spacy_ner
+Biographical Memoirs,biographical memoirs,WORK_OF_ART,15416,15436,spacy_ner
+the Turing Test,the turing test,WORK_OF_ART,12053,12068,spacy_ner

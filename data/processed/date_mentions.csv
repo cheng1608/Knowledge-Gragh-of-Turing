@@ -1,0 +1,20 @@
+﻿mention,mention_norm,label,start,end,method
+1912 - 1954,1912 - 1954,DATE,13,24,spacy_ner
+1912,1912,DATE,13,17,rule_pattern
+1954,1954,DATE,20,24,rule_pattern
+about one year old,about one year old,DATE,449,467,spacy_ner
+a few months,a few months,DATE,671,683,spacy_ner
+the year,the year,DATE,1000,1008,spacy_ner
+a very early age,a very early age,DATE,1996,2012,spacy_ner
+the year,the year,DATE,2695,2703,spacy_ner
+February,february,DATE,2905,2913,spacy_ner
+the following year,the following year,DATE,3500,3518,spacy_ner
+December of that year,december of that year,DATE,3935,3956,spacy_ner
+the year,the year,DATE,4245,4253,spacy_ner
+today,today,DATE,8222,8227,spacy_ner
+today,today,DATE,8478,8483,spacy_ner
+the day,the day,DATE,9291,9298,spacy_ner
+a few years,a few years,DATE,11554,11565,spacy_ner
+today,today,DATE,11964,11969,spacy_ner
+today,today,DATE,12084,12089,spacy_ner
+a year,a year,DATE,13773,13779,spacy_ner
