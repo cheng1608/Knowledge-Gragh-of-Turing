@@ -1,0 +1,44 @@
+﻿id,label,name,wikidata_qid,wikidata_label,wikidata_description,link_score,instance_of_qids,source,method
+CPT_002,Concept,artificial intelligence,Q11660,artificial intelligence,field of computer science that develops and studies software enabling machines to exhibit intelligent behavior,0.850,Q112057532|Q123370638|Q125161275,MacTutor,wikidata_entity_linking
+CPT_003,Concept,Common Entrance Examination,Q5153344,Common Entrance Examination,tests used by independent schools in the UK,0.850,,MacTutor,wikidata_entity_linking
+CPT_004,Concept,Enigma,Q3054377,Enigma,genus of algae,0.800,Q16521,MacTutor,wikidata_entity_linking
+CPT_005,Concept,Entscheidungsproblem,Q11030584,Entscheidungsproblem,"in computer science, the impossible task of algorithmically determining whether a given statement is provable from the axioms",0.800,Q1166625,MacTutor,wikidata_entity_linking
+CPT_006,Concept,O.B.E.,Q131264368,O.B.E.,organization,0.770,Q43229,MacTutor,wikidata_entity_linking
+CPT_007,Concept,Public School,Q1080794,public school,type of school funded in whole or in part by general taxation,0.800,Q112872396,MacTutor,wikidata_entity_linking
+CPT_008,Concept,quantum mechanics,Q944,quantum mechanics,fundamental theory in physics describing the properties of nature on an atomic scale,0.850,Q9357058|Q137582043,MacTutor,wikidata_entity_linking
+CPT_010,Concept,Turing machine,Q163310,Turing machine,abstract computation model; mathematical model of computation that defines an abstract machine which manipulates symbols on a strip of tape according to a table of rules,0.850,Q2623243|Q2651576|Q137172521,MacTutor,wikidata_entity_linking
+CPT_011,Concept,Turing Test,Q189223,Turing test,"test of a machine's ability to exhibit intelligent behaviour equivalent to, or indistinguishable from, that of a human",1.500,Q96273743|Q24034552|Q11492827,MacTutor,wikidata_entity_linking
+ORG_001,Organization,Bletchley Park,Q59536181,Bletchley Park Trust,"organization in London, United Kingdom",1.010,Q43229,MacTutor,wikidata_entity_linking
+ORG_008,Organization,Indian Civil Service,Q1661231,Indian Civil Service,civil service of India during British rule from 1858 to 1947,0.800,Q11771944|Q327333,MacTutor,wikidata_entity_linking
+ORG_009,Organization,King's College,Q1742183,King's College,"school in Taunton, Somerset, England, UK",0.820,Q269770|Q2418495,MacTutor,wikidata_entity_linking
+ORG_010,Organization,Luftwaffe,Q2564009,Luftwaffe,1935–1945 aerial warfare branch of Germany's military,0.800,Q61883,MacTutor,wikidata_entity_linking
+ORG_012,Organization,National Physical Laboratory,Q1967606,National Physical Laboratory,National Measurement Institution of the United Kingdom,1.400,Q483242|Q43229|Q31855,MacTutor,wikidata_entity_linking
+ORG_014,Organization,Princeton University,Q21578,Princeton University,"private Ivy League research university in Princeton, New Jersey, United States",0.850,Q902104|Q15936437|Q1188663|Q23002054|Q96888669,MacTutor,wikidata_entity_linking
+ORG_015,Organization,Royal Society,Q123885,Royal Society,English learned society for science,1.450,Q414147|Q2085381|Q45400320|Q955824|Q1966910|Q43229,MacTutor,wikidata_entity_linking
+ORG_016,Organization,University of Manchester,Q90830991,University of Manchester Archaeological Unit,organization,0.980,Q43229|Q131825180,MacTutor,wikidata_entity_linking
+ORG_017,Organization,Walton Athletic Club,Q136432027,Walton Athletic Club,British athletics club,0.800,Q847017,MacTutor,wikidata_entity_linking
+PER_001,Person,Alan,Q108585434,Alan,bishop of the roman-catholic church,1.280,Q5,MacTutor,wikidata_entity_linking
+PER_002,Person,Alan Turing,Q7251,Alan Turing,English computer scientist (1912–1954),1.500,Q5,MacTutor,wikidata_entity_linking
+PER_003,Person,Christopher Morcom,Q21693479,Christopher Morcom,British scientist,1.420,Q5,MacTutor,wikidata_entity_linking
+PER_004,Person,Ethel Sara Stoney,Q20895935,Ethel Sara Stoney,"mother of Alan Turing, English mathematician",1.450,Q5,MacTutor,wikidata_entity_linking
+PER_005,Person,Gordon Brown,Q10648,Gordon Brown,Prime Minister of the United Kingdom from 2007 to 2010,1.400,Q5,MacTutor,wikidata_entity_linking
+PER_006,Person,Hitler,Q352,Adolf Hitler,"dictator of Germany from 1933 to 1945, main instigator of World War II (1889–1945)",1.050,Q5,MacTutor,wikidata_entity_linking
+PER_007,Person,Julius Mathison Turing,Q20895930,Julius Mathison Turing,"father of Alan Turing, English mathematician (1873-1947)",1.450,Q5,MacTutor,wikidata_entity_linking
+PER_009,Person,Morcom,Q37504926,Morcom,family name,0.800,Q101352,MacTutor,wikidata_entity_linking
+PER_010,Person,Newman,Q117120567,Newman,,1.310,Q5,MacTutor,wikidata_entity_linking
+PER_011,Person,Turing,Q123053136,Turing,Filipino drag performer,1.280,Q5,MacTutor,wikidata_entity_linking
+PLC_001,Place,Bletchley,Q127159,Bletchley,"constituent town of Milton Keynes, in the ceremonial county of Buckinghamshire, England",0.850,Q3957,MacTutor,wikidata_entity_linking
+PLC_002,Place,Britain,Q174193,United Kingdom of Great Britain and Ireland,historical sovereign state (1801–1922),0.960,Q3624078|Q3024240|Q20181813|Q6256,MacTutor,wikidata_entity_linking
+PLC_003,Place,Cambridge,Q49111,Cambridge,"city in Middlesex County, Massachusetts, United States of America",1.450,Q1093829|Q1549591|Q515,MacTutor,wikidata_entity_linking
+PLC_004,Place,England,Q21,England,"country in north-west Europe, part of the United Kingdom",1.450,Q3336843|Q518261|Q6266|Q6256,MacTutor,wikidata_entity_linking
+PLC_005,Place,Germany,Q183,Germany,country in Central Europe,1.450,Q3624078|Q619610|Q4209223|Q63791824|Q6256,MacTutor,wikidata_entity_linking
+PLC_006,Place,Greece,Q41,Greece,country in Southeast Europe,1.450,Q3624078|Q179164|Q51576574|Q6256|Q619610|Q4209223|Q7275,MacTutor,wikidata_entity_linking
+PLC_007,Place,India,Q668,India,country in South Asia,1.450,Q6256|Q3624078|Q223832|Q7270|Q1520223|Q5255892|Q512187,MacTutor,wikidata_entity_linking
+PLC_008,Place,London,Q84,London,capital and largest city of England and the United Kingdom,1.450,Q200250|Q1066984|Q515|Q208511|Q174844|Q51929311|Q108178728,MacTutor,wikidata_entity_linking
+PLC_009,Place,Manchester,Q18125,Manchester,"city in Greater Manchester, England",1.450,Q515|Q1549591|Q7897276,MacTutor,wikidata_entity_linking
+PLC_010,Place,Paddington,Q124230,Paddington,"area within the City of Westminster, in central London, England",0.820,Q2755753,MacTutor,wikidata_entity_linking
+PLC_011,Place,Princeton,Q138518,Princeton,"municipality in Mercer County, New Jersey, United States",0.800,Q2911266,MacTutor,wikidata_entity_linking
+PLC_012,Place,Sherborne,Q586895,Sherborne,"town and civil parish in Dorset, England",0.850,Q3957|Q1115575|Q18511725,MacTutor,wikidata_entity_linking
+PLC_013,Place,United States,Q30,United States,country located primarily in North America,1.450,Q3624078|Q1520223|Q5255892|Q512187|Q1489259|Q6256|Q99541706,MacTutor,wikidata_entity_linking
+WRK_001,Work,Biographical Memoirs,Q54020419,Biographical Memoirs,,1.340,Q7725634,MacTutor,wikidata_entity_linking
+WRK_002,Work,Computable Numbers,Q20895949,"On Computable Numbers, with an Application to the Entscheidungsproblem","master's thesis by Alan Turing, 1936",1.020,Q1907875|Q13442814,MacTutor,wikidata_entity_linking

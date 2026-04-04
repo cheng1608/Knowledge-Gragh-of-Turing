@@ -1,0 +1,58 @@
+﻿id,label,name,name_norm,source,source_detail,method,confidence
+CPT_001,Concept,ACE,ace,MacTutor,entities_refined.csv,spacy_ner,0.70
+CPT_002,Concept,artificial intelligence,artificial intelligence,MacTutor,entities_refined.csv,rule_gazetteer,0.70
+CPT_003,Concept,Common Entrance Examination,common entrance examination,MacTutor,entities_refined.csv,spacy_ner,0.70
+CPT_004,Concept,Enigma,enigma,MacTutor,entities_refined.csv,rule_gazetteer,0.70
+CPT_005,Concept,Entscheidungsproblem,entscheidungsproblem,MacTutor,entities_refined.csv,spacy_ner,0.70
+CPT_006,Concept,O.B.E.,o.b.e.,MacTutor,entities_refined.csv,spacy_ner,0.70
+CPT_007,Concept,Public School,public school,MacTutor,entities_refined.csv,spacy_ner,0.70
+CPT_008,Concept,quantum mechanics,quantum mechanics,MacTutor,entities_refined.csv,rule_gazetteer,0.70
+CPT_009,Concept,Scientific Specialist,scientific specialist,MacTutor,entities_refined.csv,spacy_ner,0.70
+CPT_010,Concept,Turing machine,turing machine,MacTutor,entities_refined.csv,rule_gazetteer,0.70
+CPT_011,Concept,Turing Test,turing test,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_001,Organization,Bletchley Park,bletchley park,MacTutor,entities_refined.csv,rule_gazetteer,0.70
+ORG_002,Organization,C B Jones,c b jones,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_003,Organization,Cypher School,cypher school,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_004,Organization,F C Williams,f c williams,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_005,Organization,F L Morris,f l morris,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_006,Organization,Fellows of the Royal Society of London,fellows of the royal society of london,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_007,Organization,Hazlehurst Preparatory School,hazlehurst preparatory school,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_008,Organization,Indian Civil Service,indian civil service,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_009,Organization,King's College,king's college,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_010,Organization,Luftwaffe,luftwaffe,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_011,Organization,Moral Science Club,moral science club,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_012,Organization,National Physical Laboratory,national physical laboratory,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_013,Organization,Princeton Turing,princeton turing,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_014,Organization,Princeton University,princeton university,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_015,Organization,Royal Society,royal society,MacTutor,entities_refined.csv,rule_heuristic,0.70
+ORG_016,Organization,University of Manchester,university of manchester,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_017,Organization,Walton Athletic Club,walton athletic club,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_018,Organization,Words of Mathematics,words of mathematics,MacTutor,entities_refined.csv,spacy_ner,0.70
+ORG_019,Organization,Words of Mathematics (M,words of mathematics (m,MacTutor,entities_refined.csv,spacy_ner,0.70
+PER_001,Person,Alan,alan,MacTutor,entities_refined.csv,spacy_ner,0.70
+PER_002,Person,Alan Turing,alan turing,MacTutor,entities_refined.csv,spacy_ner,0.70
+PER_003,Person,Christopher Morcom,christopher morcom,MacTutor,entities_refined.csv,spacy_ner,0.70
+PER_004,Person,Ethel Sara Stoney,ethel sara stoney,MacTutor,entities_refined.csv,spacy_ner,0.70
+PER_005,Person,Gordon Brown,gordon brown,MacTutor,entities_refined.csv,spacy_ner,0.70
+PER_006,Person,Hitler,hitler,MacTutor,entities_refined.csv,spacy_ner,0.70
+PER_007,Person,Julius Mathison Turing,julius mathison turing,MacTutor,entities_refined.csv,rule_gazetteer,0.70
+PER_008,Person,Mathison Turing,mathison turing,MacTutor,entities_refined.csv,spacy_ner,0.70
+PER_009,Person,Morcom,morcom,MacTutor,entities_refined.csv,rule_heuristic,0.70
+PER_010,Person,Newman,newman,MacTutor,entities_refined.csv,spacy_ner,0.70
+PER_011,Person,Turing,turing,MacTutor,entities_refined.csv,rule_heuristic,0.70
+PER_012,Person,W G Welchman,w g welchman,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_001,Place,Bletchley,bletchley,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_002,Place,Britain,britain,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_003,Place,Cambridge,cambridge,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_004,Place,England,england,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_005,Place,Germany,germany,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_006,Place,Greece,greece,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_007,Place,India,india,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_008,Place,London,london,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_009,Place,Manchester,manchester,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_010,Place,Paddington,paddington,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_011,Place,Princeton,princeton,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_012,Place,Sherborne,sherborne,MacTutor,entities_refined.csv,spacy_ner,0.70
+PLC_013,Place,United States,united states,MacTutor,entities_refined.csv,spacy_ner,0.70
+WRK_001,Work,Biographical Memoirs,biographical memoirs,MacTutor,entities_refined.csv,spacy_ner,0.70
+WRK_002,Work,Computable Numbers,computable numbers,MacTutor,entities_refined.csv,spacy_ner,0.70
