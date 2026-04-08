@@ -10,14 +10,37 @@
 
 ```
 .
+├── LOG.md
+├── README.md
 ├── ontology.md
+├── neo4j.cypher
+├── requirements.txt
+├── .gitignore
 ├── scripts/
-│   └── fetch_turing_kg.py
+│   ├── align_to_schema.py
+│   ├── build_graph_tables.py
+│   ├── clean_entities.py
+│   ├── entity_linking.py
+│   ├── extract_entities.py
+│   ├── fetch_mactutor.py
+│   ├── fetch_turing_kg.py
+│   └── refine_entities.py
 ├── data/
-│   └── processed/
-│       ├── nodes.csv
-│       └── relations.csv
-└── requirements.txt
+│   ├── compare/                 # 是否使用 spaCy 的抽取对比
+│   │   ├── no_spacy/
+│   │   └── with_spacy/
+│   ├── final/                   # 对齐本体后的图数据表
+│   │   ├── nodes_final.csv
+│   │   └── relations_final.csv
+│   ├── processed/               # Wikidata 子图、实体清洗/链接等中间结果
+│   │   ├── nodes.csv
+│   │   ├── relations.csv
+│   │   └── …                    # 其余 entities_*.csv、date_mentions.csv 等
+│   └── raw/                     # MacTutor 抓取结果
+│       ├── mactutor_turing.json
+│       └── mactutor_turing.txt
+└── .vscode/                     # 可选：编辑器设置（若纳入版本库）
+    └── settings.json
 ```
 
 ## Quickstart
