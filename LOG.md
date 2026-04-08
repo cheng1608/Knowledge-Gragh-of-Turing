@@ -73,6 +73,7 @@ MacTutor 图灵传记页面
 `scripts\entity_linking.py`
 
 使用 Wikidata API 做实体消歧（链接到 QID）
+有问题，应该用词袋模型计算相似度
 
 输入：
 `data/processed/entities_schema_aligned.csv`
@@ -125,7 +126,3 @@ Unlinked: 14
 Final nodes: 53
 Final relations: 29
 ```
-
-说明：
-- 节点数大于边数属于正常现象（文本新增实体较多，关系主要来自结构化数据）
-- 后续可通过补关系抽取或去孤立节点进一步收紧图结构
