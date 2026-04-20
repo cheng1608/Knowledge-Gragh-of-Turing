@@ -10,7 +10,7 @@ import requests
 SPARQL_URL = "https://query.wikidata.org/sparql"
 TURING_QID = "Q7251"
 
-
+# 执行SPARQL查询的http请求
 def run_sparql(query: str, retries: int = 3, sleep_sec: int = 2) -> List[dict]:
     headers = {
         "Accept": "application/sparql-results+json",
@@ -31,7 +31,6 @@ def run_sparql(query: str, retries: int = 3, sleep_sec: int = 2) -> List[dict]:
                 raise
             time.sleep(sleep_sec)
     return []
-
 
 def wd_value(row: dict, key: str) -> Optional[str]:
     if key not in row:
@@ -164,7 +163,6 @@ def build_graph() -> Tuple[List[dict], List[dict]]:
         "Person",
         "Alan Turing",
     )
-
     for row in porw:
         person_qid = qid_from_uri(wd_value(row, "person"))
         if person_qid:
@@ -256,7 +254,7 @@ def write_csv(path: str, fieldnames: List[str], rows: List[dict]) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Fetch Turing KG seed data from Wikidata.")
-    parser.add_argument("--out", default="data/processed", help="Output folder for CSV files")
+    parser.add_argument("--out", default="data/processed/kg_seed", help="Output folder for CSV files")
     args = parser.parse_args()
 
     ensure_dir(args.out)

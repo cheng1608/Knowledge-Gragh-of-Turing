@@ -2,7 +2,12 @@ import argparse
 import csv
 import os
 import re
+import subprocess
+import sys
+from pathlib import Path
 from typing import Dict, List, Set, Tuple
+
+# 生成最终的节点和关系表
 
 
 GENERIC_LOW_VALUE_NAMES = {
@@ -146,11 +151,16 @@ def filter_relations(relations: List[Dict[str, str]], node_ids: Set[str]) -> Lis
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build final nodes/relations tables for graph import.")
-    parser.add_argument("--linked", default="data/processed/entities_linked.csv", help="Linked entities CSV")
-    parser.add_argument("--base_nodes", default="data/processed/nodes.csv", help="Base nodes CSV")
-    parser.add_argument("--base_relations", default="data/processed/relations.csv", help="Base relations CSV")
+    parser.add_argument("--linked", default="data/processed/entities/entities_linked.csv", help="Linked entities CSV")
+    parser.add_argument("--base_nodes", default="data/processed/kg_seed/nodes.csv", help="Base nodes CSV")
+    parser.add_argument("--base_relations", default="data/processed/kg_seed/relations.csv", help="Base relations CSV")
     parser.add_argument("--out", default="data/final", help="Output folder")
     parser.add_argument("--min_score", type=float, default=0.85, help="Minimum link score to keep linked nodes")
+    parser.add_argument(
+        "--enrich-wikidata",
+        action="store_true",
+        help="After writing relations_final.csv, add Wikidata Q-Q edges among final nodes (requires network)",
+    )
     args = parser.parse_args()
 
     linked_rows = read_csv(args.linked)
@@ -177,9 +187,27 @@ def main() -> None:
         final_relations,
     )
 
+    rel_count_msg = len(final_relations)
+    if args.enrich_wikidata:
+        enrich_script = Path(__file__).resolve().parent / "enrich_relations_wikidata.py"
+        subprocess.check_call(
+            [
+                sys.executable,
+                str(enrich_script),
+                "--nodes",
+                nodes_path,
+                "--existing",
+                rels_path,
+                "--out",
+                rels_path,
+            ]
+        )
+        rel_count_msg = len(read_csv(rels_path))
+
     print(f"Linked input rows: {len(linked_rows)}")
     print(f"Final nodes:       {len(final_nodes)} -> {nodes_path}")
-    print(f"Final relations:   {len(final_relations)} -> {rels_path}")
+    suffix = " (after Wikidata enrich)" if args.enrich_wikidata else ""
+    print(f"Final relations:   {rel_count_msg} -> {rels_path}{suffix}")
 
 
 if __name__ == "__main__":

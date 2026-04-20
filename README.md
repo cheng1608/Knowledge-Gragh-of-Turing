@@ -1,6 +1,6 @@
 # Knowledge-Gragh-of-Turing
 
-图灵（Alan Turing）主题知识图谱课程项目
+图灵（Alan Turing）主题知识图谱课程项目。
 
 ## Features
 
@@ -17,30 +17,37 @@
 ├── requirements.txt
 ├── .gitignore
 ├── scripts/
-│   ├── align_to_schema.py
-│   ├── build_graph_tables.py
-│   ├── clean_entities.py
-│   ├── entity_linking.py
-│   ├── extract_entities.py
-│   ├── fetch_mactutor.py
-│   ├── fetch_turing_kg.py
-│   └── refine_entities.py
-├── data/
-│   ├── compare/                 # 是否使用 spaCy 的抽取对比
-│   │   ├── no_spacy/
-│   │   └── with_spacy/
-│   ├── final/                   # 对齐本体后的图数据表
-│   │   ├── nodes_final.csv
-│   │   └── relations_final.csv
-│   ├── processed/               # Wikidata 子图、实体清洗/链接等中间结果
-│   │   ├── nodes.csv
-│   │   ├── relations.csv
-│   │   └── …                    # 其余 entities_*.csv、date_mentions.csv 等
-│   └── raw/                     # MacTutor 抓取结果
-│       ├── mactutor_turing.json
-│       └── mactutor_turing.txt
-└── .vscode/                     # 可选：编辑器设置（若纳入版本库）
-    └── settings.json
+│   ├── ingestion/
+│   │   ├── fetch_mactutor.py
+│   │   └── fetch_turing_kg.py
+│   ├── entity_processing/
+│   │   ├── extract_entities.py
+│   │   ├── clean_entities.py
+│   │   ├── refine_entities.py
+│   │   ├── align_to_schema.py
+│   │   └── entity_linking.py
+│   └── graph/
+│       ├── build_graph_tables.py
+│       └── enrich_relations_wikidata.py
+└── data/
+    ├── raw/
+    │   ├── mactutor_turing.json
+    │   └── mactutor_turing.txt
+    ├── processed/
+    │   ├── kg_seed/
+    │   │   ├── nodes.csv
+    │   │   └── relations.csv
+    │   └── entities/
+    │       ├── entities_raw.csv
+    │       ├── entities_clean.csv
+    │       ├── entities_refined.csv
+    │       ├── entities_schema_aligned.csv
+    │       ├── entities_linked.csv
+    │       └── ...
+    ├── final/
+    │   ├── nodes_final.csv
+    │   └── relations_final.csv
+    └── compare/
 ```
 
 ## Quickstart
@@ -51,7 +58,27 @@
 pip install -r requirements.txt
 ```
 
-None
+运行完整流程：
+
+```bash
+# 1) 结构化种子图（Wikidata）
+python scripts/ingestion/fetch_turing_kg.py
+
+# 2) 文本抓取（MacTutor）
+python scripts/ingestion/fetch_mactutor.py
+
+# 3) 实体处理
+python scripts/entity_processing/extract_entities.py
+python scripts/entity_processing/clean_entities.py
+python scripts/entity_processing/refine_entities.py
+python scripts/entity_processing/align_to_schema.py
+python scripts/entity_processing/entity_linking.py
+
+# 4) 构建终表（可选 Wikidata 补边）
+python scripts/graph/build_graph_tables.py
+# 或
+python scripts/graph/build_graph_tables.py --enrich-wikidata
+```
 
 ## Data source
 

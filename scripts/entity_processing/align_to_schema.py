@@ -158,9 +158,9 @@ def align_review_rows(rows: List[Dict[str, str]]) -> List[Dict[str, str]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="对齐实体类型到知识图谱 schema。")
-    parser.add_argument("--input", default="data/processed/entities_refined.csv", help="精清洗实体 CSV")
-    parser.add_argument("--review", default="data/processed/entities_review.csv", help="待复核实体 CSV")
-    parser.add_argument("--out", default="data/processed", help="输出目录")
+    parser.add_argument("--input", default="data/processed/entities/entities_refined.csv", help="精清洗实体 CSV")
+    parser.add_argument("--review", default="data/processed/entities/entities_review.csv", help="待复核实体 CSV")
+    parser.add_argument("--out", default="data/processed/entities", help="输出目录")
     parser.add_argument("--drop_review", action="store_true", help="将待人工复核项全部丢弃")
     args = parser.parse_args()
 

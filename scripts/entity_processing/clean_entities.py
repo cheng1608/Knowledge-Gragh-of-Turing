@@ -135,8 +135,8 @@ def write_csv(path: str, fieldnames: List[str], rows: List[Dict[str, str]]) -> N
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="初步清洗实体抽取结果。")
-    parser.add_argument("--input", default="data/processed/entities_raw.csv", help="实体抽取原始结果 CSV")
-    parser.add_argument("--out", default="data/processed", help="输出目录")
+    parser.add_argument("--input", default="data/processed/entities/entities_raw.csv", help="实体抽取原始结果 CSV")
+    parser.add_argument("--out", default="data/processed/entities", help="输出目录")
     parser.add_argument("--min_len", type=int, default=3, help="最短实体长度（标准化后）")
     args = parser.parse_args()
 

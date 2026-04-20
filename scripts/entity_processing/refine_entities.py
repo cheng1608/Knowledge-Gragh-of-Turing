@@ -266,8 +266,8 @@ def refine(rows: List[Dict[str, str]]) -> Tuple[List[Dict[str, str]], List[Dict[
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="进一步清洗实体结果（精清洗）。")
-    parser.add_argument("--input", default="data/processed/entities_clean.csv", help="初步清洗结果 CSV")
-    parser.add_argument("--out", default="data/processed", help="输出目录")
+    parser.add_argument("--input", default="data/processed/entities/entities_clean.csv", help="初步清洗结果 CSV")
+    parser.add_argument("--out", default="data/processed/entities", help="输出目录")
     args = parser.parse_args()
 
     rows = read_rows(args.input)

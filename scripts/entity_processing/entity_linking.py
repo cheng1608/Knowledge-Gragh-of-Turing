@@ -231,8 +231,8 @@ def link_entity(row: Dict[str, str], score_threshold: float) -> Tuple[Optional[D
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="实体消歧并链接到 Wikidata QID。")
-    parser.add_argument("--input", default="data/processed/entities_schema_aligned.csv", help="schema 对齐后的实体 CSV")
-    parser.add_argument("--out", default="data/processed", help="输出目录")
+    parser.add_argument("--input", default="data/processed/entities/entities_schema_aligned.csv", help="schema 对齐后的实体 CSV")
+    parser.add_argument("--out", default="data/processed/entities", help="输出目录")
     parser.add_argument("--threshold", type=float, default=0.75, help="链接分数阈值")
     args = parser.parse_args()
 

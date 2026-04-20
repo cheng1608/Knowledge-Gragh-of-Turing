@@ -88,6 +88,15 @@ MacTutor 图灵传记页面
 - 评分：名称匹配 + 类型匹配 + 描述关键词 + 排名
 - 阈值过滤：默认 `0.75`
 
+打分（score_candidate），综合：
+
+标签与 mention 的字符串关系：完全相等 +0.6；互相包含 +0.25。
+与期望 label 的类型是否一致：TYPE_QIDS 里把 Person / Organization / Place / Work / Concept 映射到一批 Wikidata QID；若候选的 P31 落在对应集合里 +0.6。
+描述关键词：DESC_KEYWORDS 里按类型在 description 里匹配英文词，每个命中 +0.05。
+搜索排名：越靠前越高，公式 max(0, 0.2 - 0.03 * rank_idx)
+
+
+
 工程问题与处理：
 - 运行中遇到 `403 Forbidden`
 - 给请求增加 `User-Agent` 和 `Accept` 头
@@ -126,3 +135,61 @@ Unlinked: 14
 Final nodes: 53
 Final relations: 29
 ```
+
+## 9. 工程化目录重构（脚本与数据分类存储）
+
+目标：让采集、实体处理、图构建三阶段分层清晰，减少路径混用，提高可维护性。
+
+### 9.1 脚本目录重构
+
+- 采集脚本迁移到：`scripts/ingestion/`
+  - `fetch_mactutor.py`
+  - `fetch_turing_kg.py`
+- 实体流水线脚本迁移到：`scripts/entity_processing/`
+  - `extract_entities.py`
+  - `clean_entities.py`
+  - `refine_entities.py`
+  - `align_to_schema.py`
+  - `entity_linking.py`
+- 图构建脚本迁移到：`scripts/graph/`
+  - `build_graph_tables.py`
+  - `enrich_relations_wikidata.py`
+
+### 9.2 数据目录重构
+
+- 种子图数据迁移到：`data/processed/kg_seed/`
+  - `nodes.csv`
+  - `relations.csv`
+- 实体处理中间结果迁移到：`data/processed/entities/`
+  - `entities_raw.csv`
+  - `entities_clean.csv`
+  - `entities_refined.csv`
+  - `entities_schema_aligned.csv`
+  - `entities_linked.csv`
+  - 以及其他实体相关中间文件
+
+### 9.3 脚本默认路径同步修改
+
+- `scripts/ingestion/fetch_turing_kg.py`
+  - 默认输出改为 `data/processed/kg_seed`
+- `scripts/entity_processing/extract_entities.py`
+  - 默认输出改为 `data/processed/entities`
+- `scripts/entity_processing/clean_entities.py`
+  - 默认输入改为 `data/processed/entities/entities_raw.csv`
+  - 默认输出改为 `data/processed/entities`
+- `scripts/entity_processing/refine_entities.py`
+  - 默认输入改为 `data/processed/entities/entities_clean.csv`
+  - 默认输出改为 `data/processed/entities`
+- `scripts/entity_processing/align_to_schema.py`
+  - 默认输入/复核输入/输出改为 `data/processed/entities/*`
+- `scripts/entity_processing/entity_linking.py`
+  - 默认输入/输出改为 `data/processed/entities/*`
+- `scripts/graph/build_graph_tables.py`
+  - 默认输入改为：
+    - `data/processed/entities/entities_linked.csv`
+    - `data/processed/kg_seed/nodes.csv`
+    - `data/processed/kg_seed/relations.csv`
+
+### 9.4 文档同步
+
+- `README.md` 已同步新的目录树与完整命令链路（含 `--enrich-wikidata` 可选补边）。
