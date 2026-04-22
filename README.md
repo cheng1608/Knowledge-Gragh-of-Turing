@@ -85,3 +85,23 @@ python scripts/graph/build_graph_tables.py --enrich-wikidata
 - Wikidata SPARQL Endpoint：`https://query.wikidata.org/sparql`
 - MacTutor 传记页面：`https://mathshistory.st-andrews.ac.uk/Biographies/Turing/`
 
+## Frontend visualization
+
+新增了一个轻量前端页面用于动态展示节点和关系：
+
+- 页面路径：`frontend/index.html`
+- 功能：
+  - 动态力导向图展示
+  - 点击节点查看详细信息与邻接节点
+  - 按类型筛选（Person / Organization / Work / Concept / Place）
+  - 按关键词搜索（节点名称 / QID）
+  - 支持导入本地 `nodes.csv` 与 `relations.csv`
+
+推荐用本地 HTTP 服务打开（避免 `file://` 读取 CSV 的限制）：
+
+```bash
+python -m http.server 8000
+```
+
+然后访问：`http://localhost:8000/frontend/index.html`
+

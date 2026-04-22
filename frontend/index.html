@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Turing KG 前端展示</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.9/dist/dist/vis-network.min.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Turing Knowledge Graph</h1>
+    <div class="stats" id="stats">节点: 0 | 关系: 0</div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel controls">
+      <h2>控制台</h2>
+
+      <div class="group">
+        <button id="loadDefaultBtn">加载默认数据</button>
+        <button id="resetBtn">重置视图</button>
+        <button id="fitBtn">适配画布</button>
+      </div>
+
+      <div class="group">
+        <label for="searchInput">搜索节点（name / id）</label>
+        <input id="searchInput" type="text" placeholder="如：Alan Turing / Q7251" />
+      </div>
+
+      <div class="group">
+        <div class="label">按类型筛选</div>
+        <div id="typeFilters" class="type-filters"></div>
+      </div>
+
+      <div class="group">
+        <div class="label">本地 CSV 导入（可选）</div>
+        <label class="file-label">nodes CSV
+          <input id="nodesFile" type="file" accept=".csv" />
+        </label>
+        <label class="file-label">relations CSV
+          <input id="relationsFile" type="file" accept=".csv" />
+        </label>
+        <button id="importBtn">导入并渲染</button>
+      </div>
+    </aside>
+
+    <section class="graph-wrap panel">
+      <div id="network"></div>
+    </section>
+
+    <aside class="panel details">
+      <h2>节点详情</h2>
+      <div id="nodeDetail" class="detail-content">
+        点击图中的节点查看详情
+      </div>
+      <h3>邻接节点</h3>
+      <ul id="neighborsList"></ul>
+    </aside>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.9/dist/vis-network.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
