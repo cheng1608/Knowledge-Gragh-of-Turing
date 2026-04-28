@@ -1,5 +1,0 @@
-start_id,relation,end_id,label,notes
-Q7251,AFFILIATED_WITH,Q1967606,1,seed positive
-Q7251,AUTHORED,Q163310,1,seed positive
-Q20895966,INTRODUCES,Q179310,1,seed positive
-Q7251,AUTHORED,Q999999999,0,synthetic negative — should not exist

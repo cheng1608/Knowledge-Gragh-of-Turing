@@ -39,14 +39,6 @@
       </div>
 
       <div class="group">
-        <div class="label">最短路径（基于结构化边，不含建议边）</div>
-        <input id="pathFromInput" type="text" placeholder="起点 name 或 id" />
-        <input id="pathToInput" type="text" placeholder="终点 name 或 id" style="margin-top:6px" />
-        <button id="pathBtn" type="button">查找路径</button>
-        <pre id="pathResult" class="pre-block"></pre>
-      </div>
-
-      <div class="group">
         <button id="exportBtn" type="button">导出当前子图 CSV</button>
         <button id="pagerankBtn" type="button">当前子图 PageRank Top</button>
         <pre id="pagerankResult" class="pre-block"></pre>
@@ -55,6 +47,7 @@
       <div class="group">
         <div class="label">建议边（heuristic，默认不并入终表）</div>
         <label><input id="toggleSuggested" type="checkbox" /> 显示已加载的建议边</label>
+        <label><input id="dedupSuggested" type="checkbox" checked /> 消歧（同方向同类型去重）</label>
         <button id="loadSuggestedBtn" type="button">从默认路径加载</button>
         <label class="file-label">建议边 CSV
           <input id="suggestedFile" type="file" accept=".csv" />

@@ -1,3 +1,0 @@
-start_id,relation,end_id,label,notes
-Q7251,AUTHORED,Q163310,1,positive example — replace IDs with your graph
-Q7251,AUTHORED,Q99999999,0,negative — nonexistent end_id pair should not appear as edge

@@ -138,67 +138,25 @@ Final relations: 29
 
 ## 9. 工程化目录重构（脚本与数据分类存储）
 
-目标：让采集、实体处理、图构建三阶段分层清晰，减少路径混用，提高可维护性。
+让采集、实体处理、图构建三阶段分层清晰，减少路径混用，提高可维护性。
 
 ### 9.1 脚本目录重构
 
 - 采集脚本迁移到：`scripts/ingestion/`
-  - `fetch_mactutor.py`
-  - `fetch_turing_kg.py`
 - 实体流水线脚本迁移到：`scripts/entity_processing/`
-  - `extract_entities.py`
-  - `clean_entities.py`
-  - `refine_entities.py`
-  - `align_to_schema.py`
-  - `entity_linking.py`
 - 图构建脚本迁移到：`scripts/graph/`
-  - `build_graph_tables.py`
-  - `enrich_relations_wikidata.py`
 
 ### 9.2 数据目录重构
 
 - 种子图数据迁移到：`data/processed/kg_seed/`
-  - `nodes.csv`
-  - `relations.csv`
 - 实体处理中间结果迁移到：`data/processed/entities/`
-  - `entities_raw.csv`
-  - `entities_clean.csv`
-  - `entities_refined.csv`
-  - `entities_schema_aligned.csv`
-  - `entities_linked.csv`
-  - 以及其他实体相关中间文件
 
-### 9.3 脚本默认路径同步修改
+## 10. 知识图谱功能与知识结构迭代
 
-- `scripts/ingestion/fetch_turing_kg.py`
-  - 默认输出改为 `data/processed/kg_seed`
-- `scripts/entity_processing/extract_entities.py`
-  - 默认输出改为 `data/processed/entities`
-- `scripts/entity_processing/clean_entities.py`
-  - 默认输入改为 `data/processed/entities/entities_raw.csv`
-  - 默认输出改为 `data/processed/entities`
-- `scripts/entity_processing/refine_entities.py`
-  - 默认输入改为 `data/processed/entities/entities_clean.csv`
-  - 默认输出改为 `data/processed/entities`
-- `scripts/entity_processing/align_to_schema.py`
-  - 默认输入/复核输入/输出改为 `data/processed/entities/*`
-- `scripts/entity_processing/entity_linking.py`
-  - 默认输入/输出改为 `data/processed/entities/*`
-- `scripts/graph/build_graph_tables.py`
-  - 默认输入改为：
-    - `data/processed/entities/entities_linked.csv`
-    - `data/processed/kg_seed/nodes.csv`
-    - `data/processed/kg_seed/relations.csv`
+补充数据
+因为发现有很多孤立点，决定补充一点数据
 
-### 9.4 文档同步
-
-- `README.md` 已同步新的目录树与完整命令链路（含 `--enrich-wikidata` 可选补边）。
-
-## 10. 知识图谱功能与知识结构迭代（按计划实施）
-
-目标：按“先契约、后功能”的顺序完成 0~4 轮迭代，提升终表可信度、可追溯性、可评估性与可演示性。
-
-### 10.1 迭代 0：数据契约与构建一致性
+### 10.1 数据一致
 
 核心问题：`filter_relations` 之前把关系 `confidence` 固定写成 `0.80`，会覆盖已有细粒度分数。
 
@@ -217,18 +175,8 @@ Final relations: 29
   - `scripts/graph/enrich_relations_text_cooccurrence.py`
   - 均改为使用统一 schema 写出，避免列不一致。
 
-验证：
-```
-python scripts/graph/build_graph_tables.py
-Linked input rows: 43
-Final nodes:       53 -> data/final/nodes_final.csv
-Final relations:   29 -> data/final/relations_final.csv
-```
 
-并确认 `data/final/relations_final.csv` 已含新列：
-`confidence,evidence,source_url`
-
-### 10.2 迭代 1：本体与溯源能力增强
+### 10.2 schema增强
 
 `ontology.md` 扩展内容：
 - 实体可选字段补充：
@@ -248,37 +196,21 @@ Final relations:   29 -> data/final/relations_final.csv
   - 邻接列表改为“按边展示”，可看到关系标签和分数
 - `frontend/styles.css`：新增详情与列表样式。
 
-### 10.3 迭代 2：质量闭环（校验 + 金标）
+### 10.3 校验
 
-新增：
 - `scripts/graph/validate_graph.py`
   - 校验节点唯一性、关系首尾节点存在性、year 可解析性、类型组合约束、confidence 范围等
   - 输出：`data/compare/validation_report.csv`
-- `scripts/graph/eval_gold.py`
-  - 用 `data/compare/gold_edges.csv` 计算 TP/FP/TN/FN、Precision/Recall/F1
-  - 支持按关系类型查看正样本命中情况
-- `data/compare/gold_edges.example.csv`（模板）
-- `data/compare/gold_edges.csv`（已放入最小示例）
 
-运行结果：
 ```
 python scripts/graph/validate_graph.py
 Nodes: 53 | Relations: 29
 Issues: 0 (errors=0, warns=0) -> data/compare/validation_report.csv
-
-python scripts/graph/eval_gold.py
-Graph edges: 29
-Gold pos: 3 | neg: 1
-TP=3 FP=0 TN=1 FN=0
-Precision=1.0000 Recall=1.0000 F1=1.0000
 ```
 
-### 10.4 迭代 3：分析型前端功能
+### 10.4 前端
 
 前端新增功能（`frontend/index.html` + `frontend/app.js`）：
-- 最短路径查询（A 节点 -> B 节点，BFS）
-  - 支持输入 `name` 或 `id`
-  - 输出路径节点序列与每跳关系
 - 子图导出
   - 导出当前筛选结果为 CSV（节点+关系）
 - 子图 PageRank
@@ -286,7 +218,7 @@ Precision=1.0000 Recall=1.0000 F1=1.0000
 - 最小置信度过滤
   - 新增 `0~1` 输入过滤边
 
-### 10.5 迭代 4：建议边与 Neo4j 支持
+### 10.5 建议边
 
 新增建议边脚本：
 - `scripts/graph/suggest_edges.py`
@@ -305,22 +237,15 @@ Wrote 52 suggestions -> data/compare/relations_suggested.csv
 - 可手动导入建议边 CSV
 - 建议边使用虚线展示，可开关显示
 
-Neo4j 脚本完善：
-- `neo4j.cypher`
-  - 增加 CSV 导入示例（节点/关系）
-  - 增加常用查询示例（计数、1跳邻居、2跳路径）
 
-### 10.6 本轮产出清单（新增/重点修改）
+### 10.6 产出清单
 
 新增：
 - `scripts/graph/relation_schema.py`
 - `scripts/graph/validate_graph.py`
-- `scripts/graph/eval_gold.py`
 - `scripts/graph/suggest_edges.py`
-- `data/compare/gold_edges.example.csv`
-- `data/compare/gold_edges.csv`
 
-重点修改：
+修改：
 - `scripts/graph/build_graph_tables.py`
 - `scripts/graph/enrich_relations_wikidata.py`
 - `scripts/graph/enrich_isolated_nodes.py`
@@ -330,3 +255,39 @@ Neo4j 脚本完善：
 - `frontend/app.js`
 - `frontend/styles.css`
 - `neo4j.cypher`
+
+### 10.7 `data/` 目录数据来源
+
+只保留 `data` 目录视角，按“上游文件 -> 下游文件”梳理：
+
+```mermaid
+flowchart LR
+  wd[Wikidata] --> kgNodes[data/processed/kg_seed/nodes.csv]
+  wd --> kgRels[data/processed/kg_seed/relations.csv]
+  mactutor[MacTutor文本] --> rawJson[data/raw/mactutor_turing.json]
+  mactutor --> rawTxt[data/raw/mactutor_turing.txt]
+
+  rawTxt --> entRaw[data/processed/entities/entities_raw.csv]
+  entRaw --> entClean[data/processed/entities/entities_clean.csv]
+  entClean --> entRefined[data/processed/entities/entities_refined.csv]
+  entRefined --> entSchema[data/processed/entities/entities_schema_aligned.csv]
+  entSchema --> entLinked[data/processed/entities/entities_linked.csv]
+
+  kgNodes --> finalNodes[data/final/nodes_final.csv]
+  kgRels --> finalRels[data/final/relations_final.csv]
+  entLinked --> finalNodes
+  entLinked --> finalRels
+
+  finalRels --> relWD[data/final/relations_final_wikidata_enriched.csv]
+  relWD --> relIso[data/final/relations_final_iso_enriched.csv]
+  relIso --> relText[data/final/relations_final_text_enriched.csv]
+  relText --> relAgg[data/final/relations_final_aggressive.csv]
+
+  finalRels --> validation[data/compare/validation_report.csv]
+  finalRels --> suggested[data/compare/relations_suggested.csv]
+```
+
+当前使用说明：
+- 前端默认读取：`data/final/nodes_final.csv` + `data/final/relations_final.csv`
+- 增强关系文件：`relations_final_*_enriched.csv` / `relations_final_aggressive.csv`
+- `data/compare/relations_suggested.csv` 是建议边，不默认并入终表

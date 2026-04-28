@@ -12,12 +12,16 @@ let allNodes = [];
 let baseEdges = [];
 /** Optional suggested edges (dashed). */
 let suggestedEdges = [];
+/** Raw suggested edges before optional disambiguation. */
+let rawSuggestedEdges = [];
 /** Rendered union; includes suggestions when enabled. */
 let allEdges = [];
 let network = null;
 let visNodes = null;
 let visEdges = null;
 let showSuggested = false;
+let currentFilteredNodeIds = new Set();
+let currentFilteredEdges = [];
 
 const networkEl = document.getElementById("network");
 const statsEl = document.getElementById("stats");
@@ -32,16 +36,13 @@ const fitBtn = document.getElementById("fitBtn");
 const importBtn = document.getElementById("importBtn");
 const nodesFileInput = document.getElementById("nodesFile");
 const relationsFileInput = document.getElementById("relationsFile");
-const pathFromInput = document.getElementById("pathFromInput");
-const pathToInput = document.getElementById("pathToInput");
-const pathBtn = document.getElementById("pathBtn");
-const pathResultEl = document.getElementById("pathResult");
 const exportBtn = document.getElementById("exportBtn");
 const pagerankBtn = document.getElementById("pagerankBtn");
 const pagerankResultEl = document.getElementById("pagerankResult");
 const minConfidenceInput = document.getElementById("minConfidenceInput");
 const loadSuggestedBtn = document.getElementById("loadSuggestedBtn");
 const toggleSuggestedEl = document.getElementById("toggleSuggested");
+const dedupSuggestedEl = document.getElementById("dedupSuggested");
 const suggestedFileInput = document.getElementById("suggestedFile");
 
 function parseCsvText(csvText) {
@@ -108,6 +109,33 @@ function recomputeAllEdges() {
   allEdges = showSuggested ? [...baseEdges, ...suggestedEdges] : [...baseEdges];
 }
 
+function edgeDisambigKey(e) {
+  return `${e.from}||${e.relation}||${e.to}`;
+}
+
+function applySuggestedDisambiguation() {
+  if (!rawSuggestedEdges.length) {
+    suggestedEdges = [];
+    return;
+  }
+  if (!dedupSuggestedEl || !dedupSuggestedEl.checked) {
+    suggestedEdges = [...rawSuggestedEdges];
+    return;
+  }
+
+  const seen = new Set(baseEdges.map((e) => edgeDisambigKey(e)));
+  const out = [];
+  for (const e of rawSuggestedEdges) {
+    const key = edgeDisambigKey(e);
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    out.push(e);
+  }
+  suggestedEdges = out;
+}
+
 function getMinConfidence() {
   const v = Number(minConfidenceInput?.value ?? 0);
   return Number.isFinite(v) ? v : 0;
@@ -163,7 +191,9 @@ function applyFilters() {
     return;
   }
 
-  const { filteredNodes, filteredEdges } = getFilteredGraph();
+  const { filteredNodes, filteredEdges, idSet } = getFilteredGraph();
+  currentFilteredNodeIds = idSet;
+  currentFilteredEdges = filteredEdges;
 
   visNodes.clear();
   visEdges.clear();
@@ -234,7 +264,7 @@ function showNodeDetail(nodeId) {
     `description: ${node.description || "-"}`,
   ].join("\n");
 
-  const incident = allEdges.filter((e) => e.from === nodeId || e.to === nodeId);
+  const incident = currentFilteredEdges.filter((e) => e.from === nodeId || e.to === nodeId);
   if (!incident.length) {
     neighborsEl.innerHTML = "<li>无邻接边</li>";
     return;
@@ -243,6 +273,9 @@ function showNodeDetail(nodeId) {
   const lines = incident
     .map((e) => {
       const other = e.from === nodeId ? e.to : e.from;
+      if (!currentFilteredNodeIds.has(other)) {
+        return "";
+      }
       const on = allNodes.find((n) => n.id === other);
       const oname = on ? on.name : other;
       const dir = e.from === nodeId ? "→" : "←";
@@ -255,102 +288,9 @@ function showNodeDetail(nodeId) {
         .join(" ");
       return `<li><code>${escapeHtml(meta)}</code> ${dir} ${escapeHtml(oname)} <small>(${escapeHtml(other)})</small></li>`;
     })
+    .filter(Boolean)
     .join("");
-  neighborsEl.innerHTML = lines;
-}
-
-function buildUndirectedAdj(edges) {
-  const adj = new Map();
-  for (const e of edges) {
-    if (!adj.has(e.from)) adj.set(e.from, new Set());
-    if (!adj.has(e.to)) adj.set(e.to, new Set());
-    adj.get(e.from).add(e.to);
-    adj.get(e.to).add(e.from);
-  }
-  return adj;
-}
-
-function shortestPathNodes(adj, fromId, toId) {
-  if (fromId === toId) {
-    return [fromId];
-  }
-  const q = [fromId];
-  const prev = new Map([[fromId, null]]);
-  while (q.length) {
-    const u = q.shift();
-    if (u === toId) {
-      break;
-    }
-    const nbrs = adj.get(u);
-    if (!nbrs) {
-      continue;
-    }
-    for (const v of nbrs) {
-      if (!prev.has(v)) {
-        prev.set(v, u);
-        q.push(v);
-      }
-    }
-  }
-  if (!prev.has(toId)) {
-    return null;
-  }
-  const path = [];
-  let cur = toId;
-  while (cur != null) {
-    path.push(cur);
-    cur = prev.get(cur);
-  }
-  path.reverse();
-  return path;
-}
-
-function findEdgeBetween(a, b, edges) {
-  return (
-    edges.find((e) => e.from === a && e.to === b) ||
-    edges.find((e) => e.from === b && e.to === a)
-  );
-}
-
-function runPathQuery() {
-  const fromQ = (pathFromInput.value || "").trim();
-  const toQ = (pathToInput.value || "").trim();
-  if (!fromQ || !toQ) {
-    pathResultEl.textContent = "请填写起点与终点（name 或 id）。";
-    return;
-  }
-  const resolve = (q) => {
-    const low = q.toLowerCase();
-    return (
-      allNodes.find((n) => n.id === q) ||
-      allNodes.find((n) => n.name.toLowerCase() === low) ||
-      allNodes.find((n) => n.name.toLowerCase().includes(low))
-    );
-  };
-  const a = resolve(fromQ);
-  const b = resolve(toQ);
-  if (!a || !b) {
-    pathResultEl.textContent = "未找到起点或终点节点。";
-    return;
-  }
-  const adj = buildUndirectedAdj(baseEdges);
-  const path = shortestPathNodes(adj, a.id, b.id);
-  if (!path) {
-    pathResultEl.textContent = `在结构化边（不含建议边）上无路径: ${a.name} ↔ ${b.name}`;
-    return;
-  }
-  const hops = [];
-  for (let i = 0; i < path.length - 1; i++) {
-    const e = findEdgeBetween(path[i], path[i + 1], baseEdges);
-    const lbl = e ? e.relation : "?";
-    hops.push(`${path[i]} -[${lbl}]-> ${path[i + 1]}`);
-  }
-  pathResultEl.textContent = [
-    `长度 ${path.length - 1}（节点序列）`,
-    path.map((id) => allNodes.find((n) => n.id === id)?.name || id).join(" → "),
-    "",
-    ...hops,
-  ].join("\n");
+  neighborsEl.innerHTML = lines || "<li>无邻接边</li>";
 }
 
 function toCsvRow(cells) {
@@ -575,6 +515,8 @@ function setGraphData(rawNodes, rawEdges, suggestedRaw = null) {
   suggestedEdges = suggestedRows
     ? normalizeEdges(suggestedRows, nodeIds, { isSuggested: true })
     : [];
+  rawSuggestedEdges = [...suggestedEdges];
+  applySuggestedDisambiguation();
   if (suggestedEdges.length) {
     showSuggested = true;
   }
@@ -593,7 +535,8 @@ async function loadSuggestedDefault() {
     const text = await fetchCsv("../data/compare/relations_suggested.csv");
     const rows = parseCsvText(text);
     const nodeIds = new Set(allNodes.map((n) => n.id));
-    suggestedEdges = normalizeEdges(rows, nodeIds, { isSuggested: true });
+    rawSuggestedEdges = normalizeEdges(rows, nodeIds, { isSuggested: true });
+    applySuggestedDisambiguation();
     showSuggested = suggestedEdges.length > 0;
     if (toggleSuggestedEl) {
       toggleSuggestedEl.checked = showSuggested;
@@ -618,7 +561,8 @@ async function importSuggestedFile() {
   const text = await readFileAsText(f);
   const rows = parseCsvText(text);
   const nodeIds = new Set(allNodes.map((n) => n.id));
-  suggestedEdges = normalizeEdges(rows, nodeIds, { isSuggested: true });
+  rawSuggestedEdges = normalizeEdges(rows, nodeIds, { isSuggested: true });
+  applySuggestedDisambiguation();
   showSuggested = true;
   if (toggleSuggestedEl) {
     toggleSuggestedEl.checked = true;
@@ -671,9 +615,6 @@ importBtn.addEventListener("click", async () => {
   }
 });
 
-if (pathBtn) {
-  pathBtn.addEventListener("click", runPathQuery);
-}
 if (exportBtn) {
   exportBtn.addEventListener("click", exportFilteredCsv);
 }
@@ -686,6 +627,17 @@ if (loadSuggestedBtn) {
 if (toggleSuggestedEl) {
   toggleSuggestedEl.addEventListener("change", () => {
     showSuggested = toggleSuggestedEl.checked;
+    recomputeAllEdges();
+    initNetwork();
+    applyFilters();
+  });
+}
+if (dedupSuggestedEl) {
+  dedupSuggestedEl.addEventListener("change", () => {
+    applySuggestedDisambiguation();
+    if (toggleSuggestedEl) {
+      toggleSuggestedEl.checked = showSuggested && suggestedEdges.length > 0;
+    }
     recomputeAllEdges();
     initNetwork();
     applyFilters();

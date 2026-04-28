@@ -7,8 +7,8 @@
 - Scheme：人物 / 机构 / 作品 / 概念 / 事件与地点
 - 统一关系契约：`relations_final.csv` 支持 `confidence/evidence/source_url`
 - 多阶段补边：Wikidata 子图补边 + 孤立节点补边 + 文本共现补边
-- 质量闭环：图约束校验（`validation_report.csv`）+ 金标评估（Precision/Recall/F1）
-- 分析增强：最短路径查询、子图导出、PageRank Top、建议边图层
+- 质量闭环：图约束校验（`validation_report.csv`）
+- 分析增强：子图导出、PageRank Top、建议边图层
 
 ## Project structure
 
@@ -37,7 +37,6 @@
 │       ├── enrich_relations_text_cooccurrence.py
 │       ├── relation_schema.py
 │       ├── validate_graph.py
-│       ├── eval_gold.py
 │       └── suggest_edges.py
 └── data/
     ├── raw/
@@ -60,15 +59,17 @@
     └── compare/
 ```
 
-## Quickstart
+## 如何运行项目
 
-安装依赖：
+### 1) 环境准备
+
+建议 Python 3.9+，在项目根目录执行：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-运行完整流程：
+### 2) 运行完整数据流水线（从采集到终表）
 
 ```bash
 # 1) 结构化种子图（Wikidata）
@@ -92,6 +93,26 @@ python scripts/graph/build_graph_tables.py --enrich-wikidata
 python scripts/graph/build_graph_tables.py --enrich-all
 ```
 
+运行完成后，核心输出为：
+- `data/final/nodes_final.csv`
+- `data/final/relations_final.csv`
+
+### 3) 只启动前端查看效果（已有终表时）
+
+如果你已经有 `data/final/nodes_final.csv` 与 `data/final/relations_final.csv`，可直接启动前端：
+
+```bash
+python -m http.server 8000
+```
+
+浏览器打开：`http://127.0.0.1:8000/frontend/index.html`
+
+### 4) 常见问题
+
+- 页面空白/加载失败：确认不是 `file://` 直接打开，而是通过本地 HTTP 服务访问。
+- 关系较稀疏：优先使用 `python scripts/graph/build_graph_tables.py --enrich-all` 重建终表。
+- 端口被占用：可改成 `python -m http.server 9000`，再访问 `http://127.0.0.1:9000/frontend/index.html`。
+
 ### 关系表字段说明（`data/final/relations_final.csv`）
 
 - 基础字段：`start_id, relation, end_id, year, role, source`
@@ -105,12 +126,7 @@ python scripts/graph/build_graph_tables.py --enrich-all
 ```bash
 # 图约束校验：输出 data/compare/validation_report.csv
 python scripts/graph/validate_graph.py
-
-# 金标评估：读取 data/compare/gold_edges.csv
-python scripts/graph/eval_gold.py
 ```
-
-`gold_edges.csv` 可参考模板：`data/compare/gold_edges.example.csv`
 
 ### 建议边生成（不并入终表）
 
@@ -137,7 +153,6 @@ python scripts/graph/suggest_edges.py
   - 按类型筛选（Person / Organization / Work / Concept / Place）
   - 按关键词搜索（节点名称 / QID）
   - 按最小关系置信度过滤
-  - 最短路径查询（A 节点 -> B 节点）
   - 导出当前筛选子图 CSV
   - 当前子图 PageRank Top
   - 建议边图层加载与开关（虚线显示）
