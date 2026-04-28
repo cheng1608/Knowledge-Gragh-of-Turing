@@ -127,14 +127,38 @@ input[type="text"] {
   white-space: pre-line;
 }
 
-#neighborsList {
-  margin: 0;
-  padding-left: 16px;
-  font-size: 13px;
+.detail-content.muted {
+  color: #667085;
 }
 
-#neighborsList li {
-  margin-bottom: 5px;
+.neighbor-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+}
+
+.neighbor-list li {
+  margin-bottom: 8px;
+}
+
+.neighbor-list code {
+  font-size: 11px;
+  background: #eef2f6;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.pre-block {
+  margin: 8px 0 0;
+  padding: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  background: #f9fafb;
+  border: 1px solid #e4e7ec;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  max-height: 160px;
+  overflow: auto;
 }
 
 @media (max-width: 1280px) {

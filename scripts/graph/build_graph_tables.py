@@ -7,6 +7,11 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
+_GRAPH_DIR = Path(__file__).resolve().parent
+if str(_GRAPH_DIR) not in sys.path:
+    sys.path.insert(0, str(_GRAPH_DIR))
+from relation_schema import RELATION_FIELDNAMES, relation_row_for_write
+
 # 生成最终的节点和关系表
 
 
@@ -136,15 +141,19 @@ def filter_relations(relations: List[Dict[str, str]], node_ids: Set[str]) -> Lis
             continue
         seen.add(key)
         out.append(
-            {
-                "start_id": s,
-                "relation": r,
-                "end_id": e,
-                "year": y,
-                "role": role,
-                "source": src,
-                "confidence": "0.80",
-            }
+            relation_row_for_write(
+                {
+                    "start_id": s,
+                    "relation": r,
+                    "end_id": e,
+                    "year": y,
+                    "role": role,
+                    "source": src,
+                    "confidence": (row.get("confidence") or "").strip(),
+                    "evidence": (row.get("evidence") or "").strip(),
+                    "source_url": (row.get("source_url") or "").strip(),
+                }
+            )
         )
     return out
 
@@ -160,6 +169,43 @@ def main() -> None:
         "--enrich-wikidata",
         action="store_true",
         help="After writing relations_final.csv, add Wikidata Q-Q edges among final nodes (requires network)",
+    )
+    parser.add_argument(
+        "--enrich-isolated",
+        action="store_true",
+        help="After Wikidata enrich, add edges for low-degree nodes",
+    )
+    parser.add_argument(
+        "--isolated-min-degree",
+        type=int,
+        default=1,
+        help="Target nodes with degree <= this value during isolated-node enrichment",
+    )
+    parser.add_argument(
+        "--isolated-aggressive",
+        action="store_true",
+        help="Keep unmapped direct properties as RELATED_TO(role=Pid) for isolated-node enrichment",
+    )
+    parser.add_argument(
+        "--enrich-text",
+        action="store_true",
+        help="After graph enrich steps, add text co-mention edges from biography text",
+    )
+    parser.add_argument(
+        "--text-path",
+        default="data/raw/mactutor_turing.txt",
+        help="Biography plain text used for co-mention enrichment",
+    )
+    parser.add_argument(
+        "--text-min-co-mentions",
+        type=int,
+        default=2,
+        help="Minimum sentence co-mention count for CO_MENTIONED edges",
+    )
+    parser.add_argument(
+        "--enrich-all",
+        action="store_true",
+        help="Run enrich-wikidata + enrich-isolated(--isolated-aggressive) + enrich-text",
     )
     args = parser.parse_args()
 
@@ -181,14 +227,15 @@ def main() -> None:
         ["id", "label", "name", "source", "confidence", "wikidata_description"],
         final_nodes,
     )
-    write_csv(
-        rels_path,
-        ["start_id", "relation", "end_id", "year", "role", "source", "confidence"],
-        final_relations,
-    )
+    write_csv(rels_path, RELATION_FIELDNAMES, final_relations)
+
+    run_wikidata = args.enrich_wikidata or args.enrich_all
+    run_isolated = args.enrich_isolated or args.enrich_all
+    run_text = args.enrich_text or args.enrich_all
+    isolated_aggressive = args.isolated_aggressive or args.enrich_all
 
     rel_count_msg = len(final_relations)
-    if args.enrich_wikidata:
+    if run_wikidata:
         enrich_script = Path(__file__).resolve().parent / "enrich_relations_wikidata.py"
         subprocess.check_call(
             [
@@ -204,9 +251,55 @@ def main() -> None:
         )
         rel_count_msg = len(read_csv(rels_path))
 
+    if run_isolated:
+        isolated_script = Path(__file__).resolve().parent / "enrich_isolated_nodes.py"
+        cmd = [
+            sys.executable,
+            str(isolated_script),
+            "--nodes",
+            nodes_path,
+            "--existing",
+            rels_path,
+            "--out",
+            rels_path,
+            "--min-degree",
+            str(args.isolated_min_degree),
+        ]
+        if isolated_aggressive:
+            cmd.append("--aggressive")
+        subprocess.check_call(cmd)
+        rel_count_msg = len(read_csv(rels_path))
+
+    if run_text:
+        text_script = Path(__file__).resolve().parent / "enrich_relations_text_cooccurrence.py"
+        subprocess.check_call(
+            [
+                sys.executable,
+                str(text_script),
+                "--nodes",
+                nodes_path,
+                "--existing",
+                rels_path,
+                "--text",
+                args.text_path,
+                "--out",
+                rels_path,
+                "--min-co-mentions",
+                str(args.text_min_co_mentions),
+            ]
+        )
+        rel_count_msg = len(read_csv(rels_path))
+
     print(f"Linked input rows: {len(linked_rows)}")
     print(f"Final nodes:       {len(final_nodes)} -> {nodes_path}")
-    suffix = " (after Wikidata enrich)" if args.enrich_wikidata else ""
+    if run_text:
+        suffix = " (after enrich-all pipeline)" if args.enrich_all else " (after text enrich)"
+    elif run_isolated:
+        suffix = " (after isolated-node enrich)"
+    elif run_wikidata:
+        suffix = " (after Wikidata enrich)"
+    else:
+        suffix = ""
     print(f"Final relations:   {rel_count_msg} -> {rels_path}{suffix}")
 
 

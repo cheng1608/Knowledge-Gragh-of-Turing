@@ -1,9 +1,12 @@
 """
-Add relations between entities that already appear in nodes_final.csv by querying
-direct Wikidata statements (P*) whose object is another Q-id in the same node set.
+Enrich low-degree (typically isolated) nodes by adding Wikidata-backed edges.
 
-Merges with an existing relations CSV (same columns as relations_final.csv) and
-deduplicates on (start_id, relation, end_id, year, role).
+Strategy:
+1) Compute node degree from existing relations.
+2) Select targets with degree <= min_degree.
+3) Query Wikidata direct claims where targets appear as subject or object.
+4) Keep only claims whose other endpoint is inside current nodes_final set.
+5) Map selected Wikidata properties to project relations and merge/deduplicate.
 """
 
 from __future__ import annotations
@@ -24,7 +27,7 @@ if str(_GRAPH_DIR) not in sys.path:
 from relation_schema import relation_row_for_write, write_relations_csv
 
 SPARQL_URL = "https://query.wikidata.org/sparql"
-USER_AGENT = "turing-kg-course-project/0.1 (educational use; relation enrichment)"
+USER_AGENT = "turing-kg-course-project/0.1 (educational use; isolated-node enrichment)"
 
 
 def run_sparql(query: str, retries: int = 6, sleep_sec: float = 2.0) -> List[dict]:
@@ -49,6 +52,15 @@ def run_sparql(query: str, retries: int = 6, sleep_sec: float = 2.0) -> List[dic
                 raise last_err
             time.sleep(sleep_sec * (1.6**i))
     raise last_err  # pragma: no cover
+
+
+def run_sparql_safe(query: str, retries: int = 6, sleep_sec: float = 2.0) -> List[dict]:
+    """Best-effort wrapper: return empty rows when one batch fails."""
+    try:
+        return run_sparql(query, retries=retries, sleep_sec=sleep_sec)
+    except Exception as e:
+        print(f"[warn] SPARQL batch failed and is skipped: {str(e)[:140]}")
+        return []
 
 
 def wd_value(row: dict, key: str) -> Optional[str]:
@@ -82,10 +94,6 @@ def claim_to_edge(
     prop_uri: str,
     label_by_id: Dict[str, str],
 ) -> Optional[Tuple[str, str, str]]:
-    """
-    Map one Wikidata direct claim to an ontology edge (start, relation, end).
-    Returns None if the property is not mapped or types look incompatible.
-    """
     pid = pid_from_uri(prop_uri)
     if not pid:
         return None
@@ -93,37 +101,31 @@ def claim_to_edge(
     ls = label_by_id.get(subject_qid, "")
     lo = label_by_id.get(object_qid, "")
 
-    # P50: author — on work, points to person
     if pid == "P50":
         if ls == "Work" and lo == "Person":
             return (object_qid, "AUTHORED", subject_qid)
         return None
 
-    # P800: notable work — person -> work
     if pid == "P800":
         if ls == "Person" and lo == "Work":
             return (subject_qid, "AUTHORED", object_qid)
         return None
 
-    # Education / employment / membership
     if pid in ("P69", "P108", "P463", "P102", "P1416"):
         if ls == "Person" and lo == "Organization":
             return (subject_qid, "AFFILIATED_WITH", object_qid)
         return None
 
-    # P737: influenced by — subject influenced by object => object INFLUENCED subject
     if pid == "P737":
         if ls == "Person" and lo == "Person":
             return (object_qid, "INFLUENCED", subject_qid)
         return None
 
-    # P921: main subject of work
     if pid == "P921":
         if ls == "Work" and lo in ("Concept", "Work", "Organization", "Person", "Place"):
             return (subject_qid, "INTRODUCES", object_qid)
         return None
 
-    # Country (organization)
     if pid == "P17":
         if ls == "Organization" and lo == "Place":
             return (subject_qid, "LOCATED_IN", object_qid)
@@ -131,7 +133,6 @@ def claim_to_edge(
             return (subject_qid, "AFFILIATED_WITH", object_qid)
         return None
 
-    # Headquarters, publication location, generic location
     if pid in ("P159", "P937", "P131", "P276"):
         if ls == "Organization" and lo == "Place":
             return (subject_qid, "LOCATED_IN", object_qid)
@@ -141,7 +142,6 @@ def claim_to_edge(
             return (subject_qid, "LOCATED_IN", object_qid)
         return None
 
-    # Biographical (not in ontology.md but useful for dense graphs)
     if pid == "P19" and ls == "Person" and lo == "Place":
         return (subject_qid, "BORN_IN", object_qid)
     if pid == "P20" and ls == "Person" and lo == "Place":
@@ -152,16 +152,52 @@ def claim_to_edge(
     return None
 
 
-def fetch_interconnecting_claims(
-    qids: List[str],
+def claim_to_edge_aggressive(
+    subject_qid: str,
+    object_qid: str,
+    prop_uri: str,
+    label_by_id: Dict[str, str],
+) -> Tuple[str, str, str, str]:
+    """
+    Aggressive fallback:
+    - First try ontology-mapped edge
+    - If no mapping, keep a generic RELATED_TO edge
+    - Return (start, relation, end, role)
+    """
+    mapped = claim_to_edge(subject_qid, object_qid, prop_uri, label_by_id)
+    if mapped:
+        s, r, e = mapped
+        return s, r, e, ""
+
+    pid = pid_from_uri(prop_uri) or ""
+    return subject_qid, "RELATED_TO", object_qid, pid
+
+
+def compute_degree(node_ids: Set[str], relations: List[Dict[str, str]]) -> Dict[str, int]:
+    degree = {nid: 0 for nid in node_ids}
+    for row in relations:
+        s = row.get("start_id", "")
+        e = row.get("end_id", "")
+        if s in degree:
+            degree[s] += 1
+        if e in degree:
+            degree[e] += 1
+    return degree
+
+
+def batched(items: List[str], size: int) -> Iterable[List[str]]:
+    for i in range(0, len(items), size):
+        yield items[i : i + size]
+
+
+def fetch_claims_subject_in_targets(
+    target_qids: List[str],
+    all_qids: Set[str],
     batch_size: int,
     pause_sec: float,
 ) -> List[Tuple[str, str, str]]:
-    """Return list of (subject_qid, full_prop_uri, object_qid) for Q->Q direct claims."""
     out: List[Tuple[str, str, str]] = []
-    qid_set = set(qids)
-    for i in range(0, len(qids), batch_size):
-        batch = qids[i : i + batch_size]
+    for batch in batched(target_qids, batch_size):
         values = " ".join(f"wd:{q}" for q in batch)
         query = f"""
         SELECT ?s ?p ?o WHERE {{
@@ -171,26 +207,61 @@ def fetch_interconnecting_claims(
           FILTER(STRSTARTS(STR(?o), "http://www.wikidata.org/entity/Q"))
         }}
         """
-        rows = run_sparql(query)
+        rows = run_sparql_safe(query)
         for row in rows:
-            sq = qid_from_uri(wd_value(row, "s"))
-            pq = wd_value(row, "p")
-            oq = qid_from_uri(wd_value(row, "o"))
-            if not sq or not pq or not oq:
+            s = qid_from_uri(wd_value(row, "s"))
+            p = wd_value(row, "p")
+            o = qid_from_uri(wd_value(row, "o"))
+            if not s or not p or not o:
                 continue
-            if oq not in qid_set:
+            if o not in all_qids:
                 continue
-            if sq == oq:
+            if s == o:
                 continue
-            out.append((sq, pq, oq))
-        if pause_sec > 0 and i + batch_size < len(qids):
+            out.append((s, p, o))
+        if pause_sec > 0:
+            time.sleep(pause_sec)
+    return out
+
+
+def fetch_claims_object_in_targets(
+    target_qids: List[str],
+    all_qids: Set[str],
+    batch_size: int,
+    pause_sec: float,
+) -> List[Tuple[str, str, str]]:
+    out: List[Tuple[str, str, str]] = []
+    all_qids_values = " ".join(f"wd:{q}" for q in sorted(all_qids))
+    for batch in batched(target_qids, batch_size):
+        values = " ".join(f"wd:{q}" for q in batch)
+        query = f"""
+        SELECT ?s ?p ?o WHERE {{
+          VALUES ?s {{ {all_qids_values} }}
+          VALUES ?o {{ {values} }}
+          ?s ?p ?o .
+          FILTER(STRSTARTS(STR(?p), "http://www.wikidata.org/prop/direct/"))
+        }}
+        """
+        rows = run_sparql_safe(query)
+        for row in rows:
+            s = qid_from_uri(wd_value(row, "s"))
+            p = wd_value(row, "p")
+            o = qid_from_uri(wd_value(row, "o"))
+            if not s or not p or not o:
+                continue
+            if s not in all_qids:
+                continue
+            if s == o:
+                continue
+            out.append((s, p, o))
+        if pause_sec > 0:
             time.sleep(pause_sec)
     return out
 
 
 def merge_relations(
     existing: List[Dict[str, str]],
-    new_edges: Iterable[Tuple[str, str, str, str]],
+    new_edges: Iterable[Tuple[str, str, str, str, str]],
     source: str,
     confidence: str,
 ) -> List[Dict[str, str]]:
@@ -223,9 +294,8 @@ def merge_relations(
             )
         )
 
-    for s, r, e, source_url in new_edges:
-        y, role = "", ""
-        key = (s, r, e, y, role)
+    for s, r, e, role, source_url in new_edges:
+        key = (s, r, e, "", role)
         if key in seen:
             continue
         seen.add(key)
@@ -235,7 +305,7 @@ def merge_relations(
                     "start_id": s,
                     "relation": r,
                     "end_id": e,
-                    "year": y,
+                    "year": "",
                     "role": role,
                     "source": source,
                     "confidence": confidence,
@@ -250,57 +320,64 @@ def merge_relations(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Enrich relations by pulling Wikidata Q-Q claims among nodes in a CSV."
+        description="Add edges for isolated/low-degree nodes using Wikidata direct claims."
     )
     parser.add_argument("--nodes", default="data/final/nodes_final.csv", help="Nodes CSV with id + label")
+    parser.add_argument("--existing", default="data/final/relations_final.csv", help="Existing relations CSV")
+    parser.add_argument("--out", default="data/final/relations_final.csv", help="Output relations CSV")
     parser.add_argument(
-        "--existing",
-        default="data/final/relations_final.csv",
-        help="Current relations CSV to merge (may be empty file with header only)",
+        "--min-degree",
+        type=int,
+        default=0,
+        help="Select nodes with degree <= this value as enrichment targets",
     )
+    parser.add_argument("--batch-size", type=int, default=20, help="SPARQL VALUES batch size")
+    parser.add_argument("--pause", type=float, default=1.0, help="Seconds between batches")
+    parser.add_argument("--confidence", default="0.84", help="Confidence for new edges")
     parser.add_argument(
-        "--out",
-        default="data/final/relations_final.csv",
-        help="Output relations CSV path",
-    )
-    parser.add_argument("--batch-size", type=int, default=35, help="VALUES ?s batch size for SPARQL")
-    parser.add_argument(
-        "--pause",
-        type=float,
-        default=1.0,
-        help="Seconds to sleep between SPARQL batches (be polite to Wikidata)",
-    )
-    parser.add_argument(
-        "--confidence",
-        default="0.82",
-        help="Confidence string for newly added edges",
+        "--aggressive",
+        action="store_true",
+        help="Use aggressive fallback: unmapped direct claims become RELATED_TO (role=Pxx)",
     )
     args = parser.parse_args()
 
     nodes = read_csv(args.nodes)
+    existing = read_csv(args.existing) if os.path.isfile(args.existing) else []
     label_by_id: Dict[str, str] = {r["id"]: r.get("label", "") for r in nodes if r.get("id")}
-    qids = sorted(label_by_id.keys())
+    all_qids = set(label_by_id.keys())
 
-    existing: List[Dict[str, str]] = []
-    if os.path.isfile(args.existing):
-        existing = read_csv(args.existing)
+    degree = compute_degree(all_qids, existing)
+    target_qids = sorted([nid for nid, deg in degree.items() if deg <= args.min_degree])
+    if not target_qids:
+        print(f"No target nodes with degree <= {args.min_degree}.")
+        print(f"Relations unchanged: {len(existing)} -> {args.out}")
+        return
 
-    raw = fetch_interconnecting_claims(qids, args.batch_size, args.pause)
-    edges: List[Tuple[str, str, str, str]] = []
-    for sq, prop_uri, oq in raw:
-        edge = claim_to_edge(sq, oq, prop_uri, label_by_id)
-        if edge:
-            s, r, e = edge
-            url = f"https://www.wikidata.org/wiki/{sq}"
-            edges.append((s, r, e, url))
+    raw_subject = fetch_claims_subject_in_targets(target_qids, all_qids, args.batch_size, args.pause)
+    raw_object = fetch_claims_object_in_targets(target_qids, all_qids, args.batch_size, args.pause)
 
-    source = "https://www.wikidata.org/ (entity subgraph)"
-    merged = merge_relations(existing, edges, source=source, confidence=args.confidence)
+    raw_unique = {(s, p, o) for (s, p, o) in (raw_subject + raw_object)}
+    mapped: List[Tuple[str, str, str, str, str]] = []
+    for s, p, o in raw_unique:
+        url = f"https://www.wikidata.org/wiki/{s}"
+        if args.aggressive:
+            ms, mr, me, role = claim_to_edge_aggressive(s, o, p, label_by_id)
+            mapped.append((ms, mr, me, role, url))
+        else:
+            edge = claim_to_edge(s, o, p, label_by_id)
+            if edge:
+                ms, mr, me = edge
+                mapped.append((ms, mr, me, "", url))
 
+    source = "https://www.wikidata.org/ (isolated-node enrich aggressive)" if args.aggressive else "https://www.wikidata.org/ (isolated-node enrich)"
+    merged = merge_relations(existing, mapped, source=source, confidence=args.confidence)
     write_relations_csv(args.out, merged)
-    print(f"Nodes in scope:     {len(qids)}")
-    print(f"Raw Q-Q claims:     {len(raw)}")
-    print(f"Mapped new edges:   {len(edges)}")
+
+    print(f"Total nodes:        {len(all_qids)}")
+    print(f"Target nodes:       {len(target_qids)} (degree <= {args.min_degree})")
+    print(f"Raw claims (subj):  {len(raw_subject)}")
+    print(f"Raw claims (obj):   {len(raw_object)}")
+    print(f"Mapped new edges:   {len(mapped)}")
     print(f"Relations written:  {len(merged)} -> {args.out}")
 
 

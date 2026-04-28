@@ -78,6 +78,8 @@ python scripts/entity_processing/entity_linking.py
 python scripts/graph/build_graph_tables.py
 # 或
 python scripts/graph/build_graph_tables.py --enrich-wikidata
+# 或（推荐，自动做多阶段补边，图更稠密）
+python scripts/graph/build_graph_tables.py --enrich-all
 ```
 
 ## Data source
