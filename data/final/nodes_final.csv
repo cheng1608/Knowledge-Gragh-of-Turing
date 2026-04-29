@@ -1,0 +1,54 @@
+﻿id,label,name,source,confidence,wikidata_description
+Q5153344,Concept,Common Entrance Examination,text_linked,0.850,tests used by independent schools in the UK
+Q11660,Concept,artificial intelligence,text_linked,0.850,field of computer science that develops and studies software enabling machines to exhibit intelligent behavior
+Q179310,Concept,computing,wikidata_seed,0.80,
+Q944,Concept,quantum mechanics,text_linked,0.850,fundamental theory in physics describing the properties of nature on an atomic scale
+Q59536181,Organization,Bletchley Park,text_linked,1.010,"organization in London, United Kingdom"
+Q220798,Organization,Government Communications Headquarters,wikidata_seed,0.80,
+Q66135280,Organization,Hazlehurst Community Primary School,wikidata_seed,0.80,
+Q924289,Organization,King's College,wikidata_seed,0.80,
+Q1967606,Organization,National Physical Laboratory,wikidata_seed|text_linked,1.400,National Measurement Institution of the United Kingdom
+Q21578,Organization,Princeton University,wikidata_seed|text_linked,0.850,"private Ivy League research university in Princeton, New Jersey, United States"
+Q123885,Organization,Royal Society,text_linked,1.450,English learned society for science
+Q2278254,Organization,Sherborne School,wikidata_seed,0.80,
+Q35794,Organization,University of Cambridge,wikidata_seed,0.80,
+Q90830991,Organization,University of Manchester,text_linked,0.980,organization
+Q867530,Organization,Victoria University of Manchester,wikidata_seed,0.80,
+Q7251,Person,Alan Turing,wikidata_seed|text_linked,1.500,English computer scientist (1912–1954)
+Q450154,Person,Andrew Hodges,wikidata_seed,0.80,
+Q21693479,Person,Christopher Morcom,text_linked,1.420,British scientist
+Q59884129,Person,Cicely Popplewell,wikidata_seed,0.80,
+Q20895935,Person,Ethel Sara Stoney,text_linked,1.450,"mother of Alan Turing, English mathematician"
+Q10648,Person,Gordon Brown,text_linked,1.400,Prime Minister of the United Kingdom from 2007 to 2010
+Q352,Person,Hitler,text_linked,1.050,"dictator of Germany from 1933 to 1945, main instigator of World War II (1889–1945)"
+Q20895930,Person,Julius Mathison Turing,text_linked,1.450,"father of Alan Turing, English mathematician (1873-1947)"
+Q298521,Person,Saul Kripke,wikidata_seed,0.80,
+Q310798,Person,Stephen Wolfram,wikidata_seed,0.80,
+Q174193,Place,Britain,text_linked,0.960,historical sovereign state (1801–1922)
+Q49111,Place,Cambridge,text_linked,1.450,"city in Middlesex County, Massachusetts, United States of America"
+Q21,Place,England,text_linked,1.450,"country in north-west Europe, part of the United Kingdom"
+Q183,Place,Germany,text_linked,1.450,country in Central Europe
+Q41,Place,Greece,text_linked,1.450,country in Southeast Europe
+Q668,Place,India,text_linked,1.450,country in South Asia
+Q84,Place,London,text_linked,1.450,capital and largest city of England and the United Kingdom
+Q122744,Place,Maida Vale,wikidata_seed,0.80,
+Q18125,Place,Manchester,text_linked,1.450,"city in Greater Manchester, England"
+Q586895,Place,Sherborne,text_linked,0.850,"town and civil parish in Dorset, England"
+Q30,Place,United States,text_linked,1.450,country located primarily in North America
+Q2011497,Place,Wilmslow,wikidata_seed,0.80,
+Q54020419,Work,Biographical Memoirs,text_linked,1.340,
+Q480476,Work,Bombe,wikidata_seed,0.80,
+Q309157,Work,Church–Turing thesis,wikidata_seed,0.80,
+Q20895949,Work,Computable Numbers,wikidata_seed|text_linked,1.020,"master's thesis by Alan Turing, 1936"
+Q20895966,Work,Intelligent Machinery,wikidata_seed,0.80,
+Q133854517,Work,Q133854517,wikidata_seed,0.80,
+Q772056,Work,Q772056,wikidata_seed,0.80,
+Q7661303,Work,Symmetric Turing machine,wikidata_seed,0.80,
+Q197970,Work,Turing completeness,wikidata_seed,0.80,
+Q1527413,Work,Turing degree,wikidata_seed,0.80,
+Q163310,Work,Turing machine,wikidata_seed|text_linked,0.850,abstract computation model; mathematical model of computation that defines an abstract machine which manipulates symbols on a strip of tape according to a table of rules
+Q189223,Work,Turing test,wikidata_seed|text_linked,1.500,"test of a machine's ability to exhibit intelligent behaviour equivalent to, or indistinguishable from, that of a human"
+Q622849,Work,halting problem,wikidata_seed,0.80,
+Q1190223,Work,non-deterministic Turing machine,wikidata_seed,0.80,
+Q1191836,Work,probabilistic Turing machine,wikidata_seed,0.80,
+Q2703890,Work,universal Turing machine,wikidata_seed,0.80,

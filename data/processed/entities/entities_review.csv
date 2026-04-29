@@ -1,0 +1,10 @@
+﻿mention,mention_norm,label,start,end,method,reason
+Alan,alan,CANDIDATE,435,444,rule_heuristic,candidate_needs_manual_review
+Automatic Computing Engine,automatic computing engine,CANDIDATE,10366,10392,rule_heuristic,candidate_needs_manual_review
+British Prime Minister Gordon,british prime minister gordon,CANDIDATE,13861,13890,rule_heuristic,candidate_needs_manual_review
+Computable Numbers,computable numbers,CANDIDATE,5460,5481,rule_heuristic,candidate_needs_manual_review
+Earliest Known Uses,earliest known uses,CANDIDATE,15486,15505,rule_heuristic,candidate_needs_manual_review
+German Enigma,german enigma,CANDIDATE,8722,8735,rule_heuristic,candidate_needs_manual_review
+Government Code,government code,CANDIDATE,8631,8646,rule_heuristic,candidate_needs_manual_review
+London Other,london other,CANDIDATE,15472,15484,rule_heuristic,candidate_needs_manual_review
+Official Secrets Act,official secrets act,CANDIDATE,8913,8933,rule_heuristic,candidate_needs_manual_review

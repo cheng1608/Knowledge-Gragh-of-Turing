@@ -1,0 +1,4 @@
+﻿id,label,name,name_norm,source,source_detail,method,confidence
+CPT_001,Concept,ACE,ace,MacTutor,entities_refined.csv,spacy_ner,0.70
+CPT_002,Concept,artificial intelligence,artificial intelligence,MacTutor,entities_refined.csv,rule_gazetteer,0.70
+CPT_003,Concept,Common Entrance Examination,common entrance examination,MacTutor,entities_refined.csv,spacy_ner,0.70

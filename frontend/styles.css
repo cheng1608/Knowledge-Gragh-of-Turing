@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1d2939;
+  background: #f5f7fb;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #d0d5dd;
+  background: #ffffff;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.stats {
+  font-size: 14px;
+  color: #475467;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr 320px;
+  gap: 12px;
+  padding: 12px;
+  height: calc(100vh - 62px);
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  padding: 12px;
+  min-height: 0;
+}
+
+.controls,
+.details {
+  overflow-y: auto;
+}
+
+.controls h2,
+.details h2 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.group {
+  margin-bottom: 14px;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #344054;
+}
+
+button {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #98a2b3;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 13px;
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #eef2f6;
+}
+
+input[type="text"] {
+  width: 100%;
+  border: 1px solid #cfd4dc;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.type-filters label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.file-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.file-label input {
+  display: block;
+  margin-top: 5px;
+}
+
+.graph-wrap {
+  padding: 0;
+}
+
+#network {
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+}
+
+.detail-content {
+  font-size: 13px;
+  line-height: 1.5;
+  background: #f9fafb;
+  border: 1px solid #e4e7ec;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  white-space: pre-line;
+}
+
+.detail-content.muted {
+  color: #667085;
+}
+
+.neighbor-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+}
+
+.neighbor-list li {
+  margin-bottom: 8px;
+}
+
+.neighbor-list code {
+  font-size: 11px;
+  background: #eef2f6;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.pre-block {
+  margin: 8px 0 0;
+  padding: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  background: #f9fafb;
+  border: 1px solid #e4e7ec;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  max-height: 160px;
+  overflow: auto;
+}
+
+@media (max-width: 1280px) {
+  .layout {
+    grid-template-columns: 260px 1fr;
+    grid-template-areas:
+      "controls graph"
+      "details graph";
+  }
+
+  .controls {
+    grid-area: controls;
+  }
+
+  .graph-wrap {
+    grid-area: graph;
+  }
+
+  .details {
+    grid-area: details;
+  }
+}

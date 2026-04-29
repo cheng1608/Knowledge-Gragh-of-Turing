@@ -1,0 +1,44 @@
+﻿start_id,relation,end_id,year,role,source,confidence
+Q123885,LOCATED_IN,Q84,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q20895966,INTRODUCES,Q179310,,,https://www.wikidata.org/,0.80
+Q21578,LOCATED_IN,Q30,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q21693479,AFFILIATED_WITH,Q2278254,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q2278254,LOCATED_IN,Q586895,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q298521,AFFILIATED_WITH,Q21578,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q310798,BORN_IN,Q84,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q310798,RESIDED_IN,Q49111,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q450154,BORN_IN,Q84,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q59884129,AFFILIATED_WITH,Q35794,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q7251,AFFILIATED_WITH,Q123885,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q7251,AFFILIATED_WITH,Q1967606,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q21578,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q220798,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q2278254,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q35794,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q66135280,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q867530,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q924289,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q1190223,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q1191836,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q133854517,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q1527413,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q163310,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q189223,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q197970,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q20895949,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q20895966,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q2703890,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q309157,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q480476,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q622849,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q7661303,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q772056,,,https://www.wikidata.org/,0.80
+Q7251,BORN_IN,Q122744,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q7251,DIED_IN,Q2011497,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q7251,INFLUENCED,Q298521,,,https://www.wikidata.org/,0.80
+Q7251,INFLUENCED,Q310798,,,https://www.wikidata.org/,0.80
+Q7251,INFLUENCED,Q450154,,,https://www.wikidata.org/,0.80
+Q7251,INFLUENCED,Q59884129,,,https://www.wikidata.org/,0.80
+Q7251,PROPOSED,Q179310,,,https://www.wikidata.org/ (heuristic),0.80
+Q7251,RESIDED_IN,Q122744,,,https://www.wikidata.org/ (entity subgraph),0.82
+Q867530,LOCATED_IN,Q18125,,,https://www.wikidata.org/ (entity subgraph),0.82

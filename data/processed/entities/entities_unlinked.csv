@@ -1,0 +1,15 @@
+﻿id,name,label,reason,top_qid,top_label
+CPT_001,ACE,Concept,low_confidence(0.71),Q38998326,Ace
+CPT_009,Scientific Specialist,Concept,no_candidate_found,,
+ORG_002,C B Jones,Organization,no_candidate_found,,
+ORG_003,Cypher School,Organization,no_candidate_found,,
+ORG_004,F C Williams,Organization,no_candidate_found,,
+ORG_005,F L Morris,Organization,no_candidate_found,,
+ORG_006,Fellows of the Royal Society of London,Organization,no_candidate_found,,
+ORG_007,Hazlehurst Preparatory School,Organization,no_candidate_found,,
+ORG_011,Moral Science Club,Organization,no_candidate_found,,
+ORG_013,Princeton Turing,Organization,no_candidate_found,,
+ORG_018,Words of Mathematics,Organization,no_candidate_found,,
+ORG_019,Words of Mathematics (M,Organization,no_candidate_found,,
+PER_008,Mathison Turing,Person,no_candidate_found,,
+PER_012,W G Welchman,Person,no_candidate_found,,

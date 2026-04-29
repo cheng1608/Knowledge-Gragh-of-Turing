@@ -1,0 +1,90 @@
+﻿start_id,relation,end_id,year,role,source,confidence
+Q10648,RELATED_TO,Q84,,P937,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q1190223,RELATED_TO,Q163310,,P279,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q1191836,RELATED_TO,Q1190223,,P279,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q123885,LOCATED_IN,Q84,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q163310,RELATED_TO,Q20895949,,P10695,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q163310,RELATED_TO,Q7251,,P61,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q163310,RELATED_TO,Q7251,,P138,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q174193,RELATED_TO,Q84,,P36,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q183,RELATED_TO,Q30,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q183,RELATED_TO,Q41,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q183,RELATED_TO,Q668,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q189223,RELATED_TO,Q7251,,P61,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q189223,RELATED_TO,Q7251,,P138,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q189223,RELATED_TO,Q772056,,P1343,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q197970,RELATED_TO,Q7251,,P138,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q20895930,RELATED_TO,Q20895935,,P26,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q20895930,RELATED_TO,Q7251,,P40,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q20895935,RELATED_TO,Q20895930,,P26,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q20895935,RELATED_TO,Q7251,,P40,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q20895966,INTRODUCES,Q179310,,,https://www.wikidata.org/,0.80
+Q21,RELATED_TO,Q84,,P36,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q21,RELATED_TO,Q84,,P13574,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q21578,LOCATED_IN,Q30,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q21693479,AFFILIATED_WITH,Q2278254,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q21693479,RELATED_TO,Q7251,,P451,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q2278254,LOCATED_IN,Q586895,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q2703890,RELATED_TO,Q163310,,P279,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q298521,AFFILIATED_WITH,Q21578,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q298521,RELATED_TO,Q30,,P27,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q30,RELATED_TO,Q183,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q30,RELATED_TO,Q41,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q30,RELATED_TO,Q668,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q309157,RELATED_TO,Q7251,,P138,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q310798,BORN_IN,Q84,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q310798,RELATED_TO,Q30,,P27,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q310798,RESIDED_IN,Q49111,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q35794,RELATED_TO,Q924289,,P355,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q41,RELATED_TO,Q183,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q41,RELATED_TO,Q30,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q41,RELATED_TO,Q668,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q450154,BORN_IN,Q84,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q480476,RELATED_TO,Q220798,,P176,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q480476,RELATED_TO,Q7251,,P61,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q49111,RELATED_TO,Q30,,P17,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q59884129,AFFILIATED_WITH,Q35794,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q668,RELATED_TO,Q183,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q668,RELATED_TO,Q30,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q668,RELATED_TO,Q41,,P530,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q7251,AFFILIATED_WITH,Q123885,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q7251,AFFILIATED_WITH,Q1967606,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q21578,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q220798,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q2278254,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q35794,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q66135280,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q867530,,,https://www.wikidata.org/,0.80
+Q7251,AFFILIATED_WITH,Q924289,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q1190223,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q1191836,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q133854517,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q1527413,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q163310,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q189223,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q197970,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q20895949,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q20895966,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q2703890,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q309157,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q480476,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q622849,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q7661303,,,https://www.wikidata.org/,0.80
+Q7251,AUTHORED,Q772056,,,https://www.wikidata.org/,0.80
+Q7251,BORN_IN,Q122744,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q7251,DIED_IN,Q2011497,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q7251,INFLUENCED,Q298521,,,https://www.wikidata.org/,0.80
+Q7251,INFLUENCED,Q310798,,,https://www.wikidata.org/,0.80
+Q7251,INFLUENCED,Q450154,,,https://www.wikidata.org/,0.80
+Q7251,INFLUENCED,Q59884129,,,https://www.wikidata.org/,0.80
+Q7251,PROPOSED,Q179310,,,https://www.wikidata.org/ (heuristic),0.80
+Q7251,RELATED_TO,Q11660,,P2650,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q7251,RELATED_TO,Q20895930,,P22,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q7251,RELATED_TO,Q20895935,,P25,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q7251,RELATED_TO,Q21693479,,P451,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q7251,RESIDED_IN,Q122744,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q7661303,RELATED_TO,Q163310,,P279,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q84,RELATED_TO,Q21,,P1376,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q867530,LOCATED_IN,Q18125,,,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q924289,RELATED_TO,Q35794,,P361,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72
+Q924289,RELATED_TO,Q35794,,P749,https://www.wikidata.org/ (isolated-node enrich aggressive),0.72

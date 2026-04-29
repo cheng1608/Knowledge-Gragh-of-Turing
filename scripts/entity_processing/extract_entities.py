@@ -162,7 +162,7 @@ def build_summary(rows: List[Dict[str, str]]) -> List[Dict[str, str]]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Extract entities from biography text.")
     parser.add_argument("--input", default="data/raw/mactutor_turing.txt", help="Input text file")
-    parser.add_argument("--out", default="data/processed", help="Output folder")
+    parser.add_argument("--out", default="data/processed/entities", help="Output folder")
     parser.add_argument("--spacy_model", default="en_core_web_sm", help="spaCy model name")
     args = parser.parse_args()
 
