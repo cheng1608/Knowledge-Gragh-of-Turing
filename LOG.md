@@ -56,7 +56,7 @@ MacTutor 图灵传记页面
    - Noise: 1
    - Date: 19
 ```
-发现还不是很干净，规则匹配进一步清洗
+还不是很干净，规则匹配进一步清洗
 `scripts\refine_entities.py`
 
 生成data\processed\entities_refined.csv和data\processed\entities_review.csv
@@ -182,7 +182,7 @@ Final relations: 29
   - `Work`: `doi`, `publicationVenue`
   - `Event`: `startYear` / `endYear`（与 `year` 兼容说明）
 - 增加“补边阶段扩展关系”说明：
-  - `BORN_IN`, `DIED_IN`, `RESIDED_IN`, `RELATED_TO`, `CO_MENTIONED` 等
+    - `BORN_IN`, `DIED_IN`, `RESIDED_IN`, `RELATED_TO`, `CO_MENTIONED` 等
 - 新增 `relations_final.csv` 字段规范小节：
   - `confidence`, `evidence`, `source_url`
 

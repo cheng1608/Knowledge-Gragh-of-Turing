@@ -5,9 +5,7 @@
 ## Features
 
 - Scheme：人物 / 机构 / 作品 / 概念 / 事件与地点
-- 统一关系契约：`relations_final.csv` 支持 `confidence/evidence/source_url`
-- 多阶段补边：Wikidata 子图补边 + 孤立节点补边 + 文本共现补边
-- 质量闭环：图约束校验（`validation_report.csv`）
+- 多阶段补边：Wikidata 子图补边 + 孤立节点补边 + 文本补边
 - 分析增强：子图导出、PageRank Top、建议边图层
 
 ## 项目结构
@@ -115,12 +113,6 @@ python -m http.server 8000
   - `evidence`：证据文本（如文本共现句子片段）
   - `source_url`：可点击来源链接
 
-### 质量验证与评估
-
-```bash
-# 图约束校验：输出 data/compare/validation_report.csv
-python scripts/graph/validate_graph.py
-```
 
 ### 建议边(后期补充关系)
 
@@ -135,29 +127,5 @@ python scripts/graph/suggest_edges.py
 - Wikidata SPARQL Endpoint：`https://query.wikidata.org/sparql`
 - MacTutor 传记页面：`https://mathshistory.st-andrews.ac.uk/Biographies/Turing/`
 
-## 前端页面
-
-新增了一个轻量前端页面用于动态展示节点和关系：
-
-- 页面路径：`frontend/index.html`
-- 功能：
-  - 动态力导向图展示
-  - 点击节点查看详细信息与邻接关系
-  - 点击边查看 `relation/year/role/source/confidence/evidence/source_url`
-  - 按类型筛选（Person / Organization / Work / Concept / Place）
-  - 按关键词搜索（节点名称 / QID）
-  - 按最小关系置信度过滤
-  - 导出当前筛选子图 CSV
-  - 当前子图 PageRank Top
-  - 建议边图层加载与开关（虚线显示）
-  - 支持导入本地 `nodes.csv` 与 `relations.csv`
-
-推荐用本地 HTTP 服务打开（避免 `file://` 读取 CSV 的限制）：
-
-```bash
-python -m http.server 8000
-```
-
-然后访问：`http://localhost:8000/frontend/index.html`
 
 
