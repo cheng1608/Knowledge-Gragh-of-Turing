@@ -56,7 +56,7 @@ MacTutor 图灵传记页面
    - Noise: 1
    - Date: 19
 ```
-发现还不是很干净，规则匹配进一步清洗
+还不是很干净，规则匹配进一步清洗
 `scripts\refine_entities.py`
 
 生成data\processed\entities_refined.csv和data\processed\entities_review.csv
@@ -138,18 +138,16 @@ Final relations: 29
 
 ## 9. 工程化目录重构（脚本与数据分类存储）
 
-让采集、实体处理、图构建三阶段分层清晰，减少路径混用，提高可维护性。
+让采集、实体处理、图构建三阶段分层清晰，减少路径混用
 
-### 9.1 脚本目录重构
+### 9.1 脚本目录
+采集脚本迁移到：`scripts/ingestion/`
+实体流水线脚本迁移到：`scripts/entity_processing/`
+图构建脚本迁移到：`scripts/graph/`
 
-- 采集脚本迁移到：`scripts/ingestion/`
-- 实体流水线脚本迁移到：`scripts/entity_processing/`
-- 图构建脚本迁移到：`scripts/graph/`
-
-### 9.2 数据目录重构
-
-- 种子图数据迁移到：`data/processed/kg_seed/`
-- 实体处理中间结果迁移到：`data/processed/entities/`
+### 9.2 数据目录
+种子图数据迁移到：`data/processed/kg_seed/`
+实体处理中间结果迁移到：`data/processed/entities/`
 
 ## 10. 知识图谱功能与知识结构迭代
 
@@ -184,12 +182,12 @@ Final relations: 29
   - `Work`: `doi`, `publicationVenue`
   - `Event`: `startYear` / `endYear`（与 `year` 兼容说明）
 - 增加“补边阶段扩展关系”说明：
-  - `BORN_IN`, `DIED_IN`, `RESIDED_IN`, `RELATED_TO`, `CO_MENTIONED` 等
+    - `BORN_IN`, `DIED_IN`, `RESIDED_IN`, `RELATED_TO`, `CO_MENTIONED` 等
 - 新增 `relations_final.csv` 字段规范小节：
   - `confidence`, `evidence`, `source_url`
 
-前端改动（溯源展示）：
-- `frontend/index.html`：新增“关系详情”区域。
+前端溯源展示：
+- `frontend/index.html`：关系详情
 - `frontend/app.js`：
   - 关系对象读取 `year/role/source/confidence/evidence/source_url`
   - 点击边显示关系元数据（来源、置信度、证据等）
@@ -208,7 +206,7 @@ Nodes: 53 | Relations: 29
 Issues: 0 (errors=0, warns=0) -> data/compare/validation_report.csv
 ```
 
-### 10.4 前端
+### 10.4 (已废弃)
 
 前端新增功能（`frontend/index.html` + `frontend/app.js`）：
 - 子图导出
@@ -238,27 +236,10 @@ Wrote 52 suggestions -> data/compare/relations_suggested.csv
 - 建议边使用虚线展示，可开关显示
 
 
-### 10.6 产出清单
 
-新增：
-- `scripts/graph/relation_schema.py`
-- `scripts/graph/validate_graph.py`
-- `scripts/graph/suggest_edges.py`
+### 10.6 数据整理
 
-修改：
-- `scripts/graph/build_graph_tables.py`
-- `scripts/graph/enrich_relations_wikidata.py`
-- `scripts/graph/enrich_isolated_nodes.py`
-- `scripts/graph/enrich_relations_text_cooccurrence.py`
-- `ontology.md`
-- `frontend/index.html`
-- `frontend/app.js`
-- `frontend/styles.css`
-- `neo4j.cypher`
-
-### 10.7 `data/` 目录数据来源
-
-只保留 `data` 目录视角，按“上游文件 -> 下游文件”梳理：
+发现data中的结构比较混乱 ，因为进行了多次补边，所以准备了梳理清晰的数据文件关系
 
 ```mermaid
 flowchart LR
@@ -287,7 +268,26 @@ flowchart LR
   finalRels --> suggested[data/compare/relations_suggested.csv]
 ```
 
-当前使用说明：
 - 前端默认读取：`data/final/nodes_final.csv` + `data/final/relations_final.csv`
 - 增强关系文件：`relations_final_*_enriched.csv` / `relations_final_aggressive.csv`
 - `data/compare/relations_suggested.csv` 是建议边，不默认并入终表
+
+data/final/relations_final_wikidata_enriched.csv
+来源：scripts/graph/enrich_relations_wikidata.py
+上游：nodes_final.csv + relations_final.csv
+用维基百科对孤立点补边
+
+data/final/relations_final_aggressive.csv
+data/final/relations_final_iso_enriched.csv
+来源：scripts/graph/enrich_isolated_nodes.py
+上游：relations_final_wikidata_enriched.csv
+
+data/final/relations_final_text_enriched.csv
+来源：scripts/graph/enrich_relations_text_cooccurrence.py
+上游：nodes_final.csv + 现有关系 + data/raw/mactutor_turing.txt
+文本中按句子共现补 CO_MENTIONED 边
+
+data/compare/relations_suggested.csv
+来源：scripts/graph/suggest_edges.py
+上游：relations_final.csv
+逻辑：Adamic-Adar 启发式建议边

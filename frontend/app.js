@@ -584,9 +584,10 @@ loadDefaultBtn.addEventListener("click", async () => {
 });
 
 searchInput.addEventListener("input", applyFilters);
-if (minConfidenceInput) {
-  minConfidenceInput.addEventListener("input", applyFilters);
-}
+// Feature temporarily disabled: minimum-confidence filtering UI/input.
+// if (minConfidenceInput) {
+//   minConfidenceInput.addEventListener("input", applyFilters);
+// }
 
 resetBtn.addEventListener("click", () => {
   searchInput.value = "";
@@ -615,12 +616,13 @@ importBtn.addEventListener("click", async () => {
   }
 });
 
-if (exportBtn) {
-  exportBtn.addEventListener("click", exportFilteredCsv);
-}
-if (pagerankBtn) {
-  pagerankBtn.addEventListener("click", pageRankFiltered);
-}
+// Feature temporarily disabled: subgraph CSV export and PageRank actions.
+// if (exportBtn) {
+//   exportBtn.addEventListener("click", exportFilteredCsv);
+// }
+// if (pagerankBtn) {
+//   pagerankBtn.addEventListener("click", pageRankFiltered);
+// }
 if (loadSuggestedBtn) {
   loadSuggestedBtn.addEventListener("click", () => loadSuggestedDefault());
 }
