@@ -10,7 +10,7 @@
 - 质量闭环：图约束校验（`validation_report.csv`）
 - 分析增强：子图导出、PageRank Top、建议边图层
 
-## Project structure
+## 项目结构
 
 ```
 .
@@ -59,9 +59,9 @@
     └── compare/
 ```
 
-## 如何运行项目
+## 运行项目
 
-### 1) 环境准备
+### 1) 环境
 
 建议 Python 3.9+，在项目根目录执行：
 
@@ -69,7 +69,7 @@
 pip install -r requirements.txt
 ```
 
-### 2) 运行完整数据流水线（从采集到终表）
+### 2) 运行数据流水线
 
 ```bash
 # 1) 结构化种子图（Wikidata）
@@ -97,21 +97,15 @@ python scripts/graph/build_graph_tables.py --enrich-all
 - `data/final/nodes_final.csv`
 - `data/final/relations_final.csv`
 
-### 3) 只启动前端查看效果（已有终表时）
+### 3) 前端查看效果
 
-如果你已经有 `data/final/nodes_final.csv` 与 `data/final/relations_final.csv`，可直接启动前端：
+ 生成了`data/final/nodes_final.csv` 与 `data/final/relations_final.csv`以后，可直接启动前端：
 
 ```bash
 python -m http.server 8000
 ```
 
 浏览器打开：`http://127.0.0.1:8000/frontend/index.html`
-
-### 4) 常见问题
-
-- 页面空白/加载失败：确认不是 `file://` 直接打开，而是通过本地 HTTP 服务访问。
-- 关系较稀疏：优先使用 `python scripts/graph/build_graph_tables.py --enrich-all` 重建终表。
-- 端口被占用：可改成 `python -m http.server 9000`，再访问 `http://127.0.0.1:9000/frontend/index.html`。
 
 ### 关系表字段说明（`data/final/relations_final.csv`）
 
@@ -128,7 +122,7 @@ python -m http.server 8000
 python scripts/graph/validate_graph.py
 ```
 
-### 建议边生成（不并入终表）
+### 建议边(后期补充关系)
 
 ```bash
 python scripts/graph/suggest_edges.py
@@ -136,12 +130,12 @@ python scripts/graph/suggest_edges.py
 
 输出：`data/compare/relations_suggested.csv`
 
-## Data source
+## 数据来源
 
 - Wikidata SPARQL Endpoint：`https://query.wikidata.org/sparql`
 - MacTutor 传记页面：`https://mathshistory.st-andrews.ac.uk/Biographies/Turing/`
 
-## Frontend visualization
+## 前端页面
 
 新增了一个轻量前端页面用于动态展示节点和关系：
 
@@ -166,9 +160,4 @@ python -m http.server 8000
 
 然后访问：`http://localhost:8000/frontend/index.html`
 
-### Neo4j 导入（可选）
-
-项目已在 `neo4j.cypher` 提供：
-- CSV 导入示例（节点与关系）
-- 常用查询示例（总量、1 跳邻居、2 跳路径）
 
